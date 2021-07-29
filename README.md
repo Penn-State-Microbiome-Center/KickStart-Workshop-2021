@@ -3,9 +3,9 @@
 Materials for the Fall 2020 KickStart Workshop
 
 ## Details
-August 9 - 13th, 2021
-Time: 1pm - 5pm each day
-Zoom (link in email)
+August 9 - 13th, 2021  
+Time: 1pm - 5pm each day  
+Zoom (link in email/emailed google doc link)
 
 ### Tutors:
 - Laura Weyrich  
