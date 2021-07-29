@@ -1,5 +1,5 @@
-![IntroImage](images/IntroImage.jpg)
-# KickStart-Workshop-2020
+![IntroImage](images/IntroImage.png)
+# KickStart-Workshop-2021
 Materials for the Fall 2020 KickStart Workshop
 
 ## Details
