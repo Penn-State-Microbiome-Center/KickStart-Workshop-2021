@@ -17,8 +17,15 @@ shotgun sequencing data.
 - `cd MetaPhlAn_Analysis`
 - `mkdir data`
 - `cd data`
-- Download the data: `wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt`
+- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt`
 - Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
+- `cd ..`
+
+# Create folder directory
+- `mkdir output`
+- `mkdir scripts`
+- `cd scripts`
+- `vim run_metaphlan.sh`
 ------------------------------------------------------------------------------------
 
 Table of contents
