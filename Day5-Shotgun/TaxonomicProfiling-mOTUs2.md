@@ -10,14 +10,14 @@ which leads to higher sensitivity.
 # Installation
 - Activate conda on Roar: `module load anaconda3`
 - Create the environment: `conda create -y --name motus2 -c bioconda motus`
-- Start the environment: `conda activate metaphlan`
+- Start the environment: `conda activate motus2`
 
 # Obtaining test data:
 - Make analysis folder: `mkdir mOTUs_Analysis`
 - `cd mOTUs_Analysis`
 - `mkdir data`
 - `cd data`
-- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt`
+- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt`
 - Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
 - `cd ..`
 
