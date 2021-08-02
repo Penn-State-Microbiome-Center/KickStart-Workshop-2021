@@ -1,23 +1,24 @@
 
 **MetaPhlAn 3.0 Tutorial**
 ===========================
+Borrowing heavily from [here](https://github.com/biobakery/biobakery/wiki/metaphlan3).
 
 [MetaPhlAn](https://github.com/biobakery/MetaPhlAn/tree/3.0) is a tool
-for profiling the composition of microbial communities from metagenomic
+for profiling the taxonomic composition of microbial communities from metagenomic
 shotgun sequencing data.
 
-- Tutorials for [MetaPhlAn1](https://github.com/biobakery/biobakery/wiki/metaphlan1) and [MetaPhlAn2](https://github.com/biobakery/biobakery/wiki/metaphlan2) are also available.
--   Please direct questions to the [MetaPhlAn biobakery support forum](https://forum.biobakery.org/c/Microbial-community-profiling/MetaPhlAn).
-- For information on installation and pre-requisites, see [here](https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-3.0).
+# Installation
+- Activate conda on Roar: `module load anaconda3`
+- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 metaphlan`
+- Start the environment: `conda activate metaphlan`
 
-If you're using this tutorial as part of a workshop, or if you'd like to
-think about the algorithm and implementation details a bit, you'll
-occasionally see "discussion questions" at the end of tutorial sections,
-formatted like this:
-
--   **What is your quest?**
--   **What is your favorite color?**
-
+# Obtaining test data:
+- Make analysis folder: `mkdir MetaPhlAn_Analysis`
+- `cd MetaPhlAn_Analysis`
+- `mkdir data`
+- `cd data`
+- Download the data: `wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt`
+- Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
 ------------------------------------------------------------------------------------
 
 Table of contents
