@@ -9,7 +9,7 @@ shotgun sequencing data.
 
 # Installation
 - Activate conda on Roar: `module load anaconda3`
-- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 metaphlan`
+- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
 - Start the environment: `conda activate metaphlan`
 
 # Obtaining test data:
@@ -116,47 +116,10 @@ input files that have been subsampled for rapid analysis:
 The original files, and many others, can be downloaded from the [HMP
 DACC](http://hmpdacc.org/HMASM/).
 
-- **IF you are running this tutorial as a part of short course** on a cloud instance, the input files have been pre-downloaded. Open a terminal and enter:
-
-        cd Tutorials/metaphlan3
-        ls input
-
-- Copy the input files into the current working directory
-
-        cp input/*fasta.gz .
-
-Use the `ls` command to check if the files have been correctly copied/downloaded. 
-We are now ready to run MetaPhlAn.
 
 Please proceed to [**Run a single sample**](#run-a-single-sample) section below. 
 
 ***
-
-
--  **IF you're running this tutorial locally (your PC/laptop)**, make a new folder in your current working directory with `mkdir` and access it with `cd`. Use this folder for all MetaPhlAn analysis.
-
-         mkdir metaphlan_analysis
-         cd metaphlan_analysis
-
--   Click on the links to download
-each file. **NOTE** that if you are using the Google Chrome browser, it
-may automatically decompress (gunzip) the gzip-ed files. The files
-should download to your default `Downloads` folder location.
-Copy files to this location from your Downloads folder:
-
-         cp ~/Downloads/SRS*.fasta.gz .
-
--   OR, you can use the `curl` or `wget` programs to download each file directly into the folder you created. Make sure in the correct folder i.e. `metaphlan_analysis` with `pwd`. Right click on each link, choose "Copy Link Address" (or equivalent), and in a terminal
-type:
-
-         curl -LO https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/input/SRS014476-Supragingival_plaque.fasta.gz
-
-        or
-
-         wget https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/input/SRS014476-Supragingival_plaque.fasta.gz
-
-Use the `ls` command to check if the files have been correctly copied/downloaded. We are now ready to run MetaPhlAn.
-        
 
 ------------------------------------------------------------------------
 
