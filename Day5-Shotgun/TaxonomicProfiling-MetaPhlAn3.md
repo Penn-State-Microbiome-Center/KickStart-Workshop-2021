@@ -7,6 +7,8 @@ Borrowing heavily from [here](https://github.com/biobakery/biobakery/wiki/metaph
 for profiling the taxonomic composition of microbial communities from metagenomic
 shotgun sequencing data.
 
+This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
+
 # Installation
 - Activate conda on Roar: `module load anaconda3`
 - Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
