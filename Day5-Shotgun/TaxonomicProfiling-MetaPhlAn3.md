@@ -405,10 +405,7 @@ convenience script that can show any, some, or all of the microbes or
 samples in a MetaPhlAn table. In this tutorial we will plot the heatmap
 for all of the samples.
 
-**If you're using this tutorial from the** [bioBakery
-VM](https://bitbucket.org/biobakery/biobakery) **(locally or on the
-cloud), hclust2 is already installed!** Otherwise, you can install
-hclust2 and other bioBakery tools automatically with
+You can install hclust2 and other bioBakery tools automatically with
 [Conda](https://docs.conda.io/en/latest/). :
 
      conda install -c biobakery hclust2
@@ -518,22 +515,22 @@ line, but if you'd like to use an online
 Galaxy](https://github.com/biobakery/biobakery/wiki/graphlan#rst-header-graphlan-galaxy-module).
 For more information on this tool, refer to the [GraPhlAn
 tutorial](https://github.com/biobakery/biobakery/wiki/graphlan).
-**If you're using this tutorial from the** [bioBakery
-VM](https://github.com/biobakery/biobakery) **(locally or on the
-cloud), GraPhlAn is already installed!** Otherwise, you can install
-GraPhlAn and other bioBakery tools automatically with
+
+You can install GraPhlAn and other bioBakery tools automatically with
 [Conda](https://docs.conda.io/en/latest/):
 
-     conda install -c biobakery graphlan
-     conda install -b bioconda export2graphlan
+```bash
+conda deactivate
+conda create -y -n graphlan biopython graphlan export2graphlan
+conda activate graphlan 
+```
 
 This will install GraPhlAn, export2graphlan, and all of its dependencies.
 
 Alternatively, you can manually install them from source by
 [downloading
 GraPhlAn](https://github.com/biobakery/graphlan/archive/1.1.3.zip) and [downloading export2graphlan](https://github.com/SegataLab/export2graphlan/archive/0.22.zip)
-and then install the GraPhlAn dependencies (numpy, pandas, biopython,
-scipy, and matplotlib).
+and then install the GraPhlAn dependencies (numpy, pandas, biopython, scipy, and matplotlib).
 
 ------------------------------------------------------------------------
 **Step 1:** Create the GraPhlAn input files
