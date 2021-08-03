@@ -386,7 +386,9 @@ git clone https://github.com/dkoslicki/TAMPA.git
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
-conda install -c etetoolkit -y numpy ete3 seaborn pandas matplotlib biom-format
+conda deactivate
+conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
+conda activate tampa
 ```
 You can then view the output by running the following:
 ```bash
