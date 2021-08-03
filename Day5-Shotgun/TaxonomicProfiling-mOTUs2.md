@@ -139,3 +139,7 @@ python ../../TAMPA/src/profile_to_plot.py -i ../../MetaPhlAn_Analysis/output/SRS
 You should then see a file like the following:
 ![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
 
+So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let's investigate why this is the case.
+
+## **Supporting evidence**
+`motus profile -s ../data/SRS014464-Anterior_nares.fastq -o SRS014464-Anterior_nares.motus_counts -I SRS014464-Anterior_nares.motus_bam -M SRS014464-Anterior_nares.motus_mgc -c`
