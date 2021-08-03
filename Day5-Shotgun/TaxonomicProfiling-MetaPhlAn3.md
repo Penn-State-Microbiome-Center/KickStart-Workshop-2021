@@ -43,6 +43,7 @@ Table of contents
   * [**Run multiple samples**](#run-multiple-samples)
   * [**Merge outputs**](#merge-outputs)
 - [**Visualize results**](#visualize-results)
+  * [**Simple Vizualization with TAMPA*](#simple-vizualization-with-tampa)
   * [**Create a heatmap with hclust2**](#create-a-heatmap-with-hclust2)
   * [**Create a cladogram with GraPhlAn**](#create-a-cladogram-with-graphlan)
 
