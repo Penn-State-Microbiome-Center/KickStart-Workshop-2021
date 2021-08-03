@@ -117,8 +117,25 @@ Let's run, in parallel, all the samples through mOTUs2. Put the following code i
 	for file in `ls ${inputFolder}/*.fastq`;
 	do
 		baseName=$(basename $file)
-		motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 &
+		motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
 	done
 
 And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
+
+## **Comparing differences between tools**
+
+Now that we have run both mOTUs2 and MetaPhlAn3 on the same data, we can compare the differences between these tools. Using TAMPA (which we installed previously) we can do this.
+```
+conda deactivate
+conda activate tampa
+```
+Let's pretend the mOTUs2 profile is the "ground truth" and compare its results on one sample to that of MetaPhlAn3:
+```bash
+cd ../output
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
+python ../../TAMPA/src/profile_to_plot.py -i ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
+```
+You should then see a file like the following:
+![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
 
