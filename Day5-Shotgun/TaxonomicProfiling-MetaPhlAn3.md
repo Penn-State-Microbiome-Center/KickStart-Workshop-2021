@@ -142,7 +142,7 @@ Here is the basic example to profile a single metagenome from raw reads:
 ### **Output files**
 
 Running MetaPhlAn, following the example in the prior section, will
-create two output files. Check what files have been created with `ls -ltr`.
+create two output files. Check what files have been created with `more`.
 
 **File 1:**
 [SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
@@ -153,7 +153,7 @@ markers.
 Alignments are listed one per line in tab-separated columns of read and
 reference marker.
 
-     less -S SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt
+     more -S SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt
 
 Output:
 
@@ -170,7 +170,6 @@ Output:
     HWUSI-EAS1568_102539179:1:100:10109:14464/1     43768__E0DGH3__HMPREF0299_6971
     HWUSI-EAS1568_102539179:1:100:10112:17904/1     43768__E0DEQ2__HMPREF0299_6337
 
-<!--img src="https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_bowtie2out.png" width= 500-->
 
 **File 2:**
 [SRS014476-Supragingival\_plaque\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque_profile.txt)
@@ -180,7 +179,7 @@ This file contains the final computed organism abundances.
 Organism abundances are listed one clade per line, tab-separated from
 the clade's percent abundance:
 
-     less -S SRS014476-Supragingival_plaque_profile.txt
+     more -S SRS014476-Supragingival_plaque_profile.txt
 
 Output:
 
@@ -202,8 +201,6 @@ Output:
     ~
     ~
 
-<!--img src="https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_profile.png" width=2400-->
-
 * The file has a 4-line header. The **first line** lists the reference marker genes database that MetaPhlAn uses. There are ~1.1M unique clade-specific marker genes identified from ~100k reference genomes (~99,500 bacterial and archaeal and ~500 eukaryotic). The **second line** lists the path to the tool, the name of the input file and the arguments that mentioned. The **fourth line** has the column headers for the columns below.
 * The first column lists clades, ranging from taxonomic kingdoms
 (Bacteria, Archaea, etc.) through species. The taxonomic level of each
@@ -213,7 +210,7 @@ clade is prefixed to indicate its level:
 We will look for (grep) lines which contain the pattern `s__` that is associated with species and print the first match with the `-m1` argument. Remember that this file have 4 tab-separated columns and the taxonomy is listed in the first; so we will use `cut -f1` to get (cut out) the first column only (the field at position 1). Finally, the taxonomic levels are separated by the `|` character which we will replace with the new line character `\n`.
 
 
-      grep s__ -m1 SRS014476-Supragingival_plaque_profile.txt | cut -f1 | sed 's/|/\n/g'
+      grep "s__" -m1 SRS014476-Supragingival_plaque_profile.txt | cut -f1 | sed 's/|/\n/g'
 
 Output (The taxonomy of the microbe *C. matruchotii*):
 
@@ -332,12 +329,6 @@ following links (right-click on the link and pick 'Save Link as ..' or click on 
     -   [SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
     -   [SRS014494-Posterior\_fornix.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix.fasta.gz.bowtie2out.txt)
 
-
-- **If you are running this tutorial as part of a short course**, the output bowtie2out and profile files are in the `output` folder. To copy them to the current directory, enter:
-```
-     cp output/*_profile.txt .
-```
-
 ### **Merge outputs**
 
 Finally, the MetaPhlAn distribution includes a utility script that will
@@ -386,6 +377,25 @@ The first few lines look like:
 
 ## **Visualize results**
 ---------------------
+
+### **Simple Vizualization with TAMPA**
+For a quick visualization of the profile, I've developed a tool called TAMPA (TAxonoMic Profiling Anlaysis) to help view the profile output when it is in the CAMI 
+(Critical Assessment of Metagenome Interpretation) format. To install this tool, run the following:
+```bash
+git clone https://github.com/dkoslicki/TAMPA.git
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda install -c etetoolkit -y numpy ete3 seaborn pandas matplotlib biom-format
+```
+You can then view the output by running the following:
+```bash
+ python TAMPA/src/profile_to_plot.py -i MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  -g MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -b Anterior_nares -nm genus
+```
+This will create a file `Anterior_nares_tree_genus_Metaphlan_Analysis.png` which you can transfer back to your device and view. It should look like the following:
+![Anterior_nares_tree_genus_Metaphlan_Analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
+
+Note that TAMPA was originally designed for pairwise comparison of profiles (tool vs. tool, or tool vs. ground truth), hence the funky display.
 
 ### **Create a heatmap with hclust2**
 
