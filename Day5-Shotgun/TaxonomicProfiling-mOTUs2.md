@@ -96,26 +96,29 @@ For our purposes, the most important parameter is `-C` which specifies the CAMI 
 -C precision    # higher precision
 -C recall       # higher recall
 -C parenthesis  # a balance between precision and recall
-```.
+```
 
 Since we now have practice running multiple samples, let's jump straight to:
 
 ### **Run multiple samples**
 
-Let's run, in parallel, all the samples through mOTUs2:
-```
-#!/bin/bash
-set -e  # exit if there is an error
-set -u  # exit if a variable is undefined
+Let's run, in parallel, all the samples through mOTUs2. Put the following code in a file called `run_motus.sh`:
 
-baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
-outputFolder="${baseFolder}/output"
 
-# Now analyze everything in one go
-inputFolder="${baseFolder}/data/"
-for file in `ls ${inputFolder}/*.fastq`;
-do
-	baseName=$(basename $file)
-	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 &
-done
-```
+	#!/bin/bash
+	set -e  # exit if there is an error
+	set -u  # exit if a variable is undefined
+
+	baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
+	outputFolder="${baseFolder}/output"
+
+	# Now analyze everything in one go
+	inputFolder="${baseFolder}/data/"
+	for file in `ls ${inputFolder}/*.fastq`;
+	do
+		baseName=$(basename $file)
+		motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 &
+	done
+
+And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
+
