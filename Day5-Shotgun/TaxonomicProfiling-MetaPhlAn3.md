@@ -9,6 +9,9 @@ shotgun sequencing data.
 
 This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
 
+# Interactive SSH session
+` qsub -A wff3_g_g_lc_icds-training -l walltime=4:00:00 -l nodes=1:ppn=4 -I`
+
 # Installation
 - Activate conda on Roar: `module load anaconda3`
 - Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
