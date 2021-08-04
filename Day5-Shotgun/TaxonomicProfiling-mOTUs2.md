@@ -142,4 +142,31 @@ You should then see a file like the following:
 So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let's investigate why this is the case.
 
 ## **Supporting evidence**
+let's chase down how mOTUs2 infered that Actinobacteris is present in the sample. Using the `-c` flag, we can indicate that we want read counts instead of relative 
+abundances. We can also save the alignment BAM file with `-I` and the mOTU read counts with `-M` in the following fashion:
+
 `motus profile -s ../data/SRS014464-Anterior_nares.fastq -o SRS014464-Anterior_nares.motus_counts -I SRS014464-Anterior_nares.motus_bam -M SRS014464-Anterior_nares.motus_mgc -c`
+
+The `*.motus_counts` file contains the counts of _every_ mOTU in their database, so let's just select the ones with non-zero read counts:
+```
+grep -v '0$' SRS014464-Anterior_nares.motus_counts
+```
+Which gives an output of:
+```
+#consensus_taxonomy     unnamed sample
+Corynebacterium pseudodiphtheriticum [ref_mOTU_v2_0478] 1
+Dolosigranulum pigrum [ref_mOTU_v2_5089]        1
+unknown Moraxella [meta_mOTU_v2_6740]   1
+```
+So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. If you like, you can take a look at the alignment to investigate if this is spurious or not.
+
+```bash
+ samtools view -h SRS014464-Anterior_nares.motus_bam > SRS014464-Anterior_nares.motus_sam
+ cd /data/dmk333/Software/conda/miniconda3/envs/motus2/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
+ grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/KickStartWorkshop2021/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
+ cd ~/KickStartWorkshop2021/mOTUs_Analysis/output/
+ grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
+ ```
+ Then you can find exact matches in the SAM file such as:
+ `HWI-EAS109_102883399:3:86:17435:12622.lane0.single      16      refMG0011662.COG0172    95      0       100M <snip>`
+ ```
