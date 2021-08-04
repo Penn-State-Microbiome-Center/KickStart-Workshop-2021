@@ -167,6 +167,9 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
  cd ~/KickStartWorkshop2021/mOTUs_Analysis/output/
  grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  ```
+ 
  Then you can find exact matches in the SAM file such as:
- `HWI-EAS109_102883399:3:86:17435:12622.lane0.single      16      refMG0011662.COG0172    95      0       100M <snip>`
  ```
+ HWI-EAS109_102883399:3:86:17435:12622.lane0.single      16      refMG0011662.COG0172    95      0       100M <snip>
+ ```
+so it really is in there!
