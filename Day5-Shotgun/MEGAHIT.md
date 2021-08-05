@@ -111,10 +111,13 @@ We could specify that _all_ k-mers should be considered, and can indicate this b
 ```
 megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/min1 --min-count 1
 ```
+This will likely result in many more, shorter contigs due to trusting _every_ k-mer as a true k-mer. I.e. Since we have ignored the effect of noise, we will likely 
+have a variety of contigs that only differ by a few bases, which are likely due to sequencing error.
 
-We could also change what range of k-mer sizes we want to use. In general, the larger the k-mer size you use, the more specific (and less sensitive) your assemblies will be. 
+Alternatively, we could also change what range of k-mer sizes we want to use. In general, the larger the k-mer size you use, the more specific (and less sensitive) your assemblies will be. 
 In practice, this _can_ result in the assembly of high abundance organisms. Inversely, the smaller the k-mer size, the more sensitive (but less specific) your assembly will be. 
 I.e. you may get a bunch of really short contigs.
+
 ```
 megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/ksize11-51-10 --k-min 11 --k-max 51 --k-step 10
 ```
