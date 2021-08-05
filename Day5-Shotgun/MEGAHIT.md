@@ -159,7 +159,8 @@ Let's go ahead and run QUAST on each of the assemblies. We will create a file th
 ```
 cd ../scripts
 vim run_quast.sh
-# Copy the following into that file: ":a<enter>, paste, :w!<enter>m :<shift>zz"
+# Copy the following into that file: "a, paste, <esc>:w!<enter>, <shift>zz"
+
 #!/bin/bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
@@ -169,11 +170,11 @@ outputFolder="${baseFolder}/output"
 
 # Now analyze everything in one go
 inputFolder="${baseFolder}/output/"
-for file in `ls -d */ output/`;
+for folder in `ls -d ../output/*`;
 do
-	quast -o quast_out -m 250 --circos --glimmer --rna-finding --single ../../data/SRS014464-Anterior_nares.fasta final.contigs.fa `#<<-- the input assembly`
-  motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
+        quast -o ${folder}/quast_out -m 250 --circos --glimmer --rna-finding --single ../data/SRS014464-Anterior_nares.fasta ${folder}/final.contigs.fa
 done
+
 ```
 Then make it executable and run it:
 ```
