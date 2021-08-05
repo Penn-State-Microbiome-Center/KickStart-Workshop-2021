@@ -41,6 +41,8 @@ cd ../..
 Please note that this is a Linux-specific installation, but the developers are [working](https://github.com/ziyewang/MetaBinner/issues/4) on a cross-platform installation method (i.e. conda).
 
 ## Running MetaBinner
+
+### Preprocessing
 MetaBinner requires a bit more manual work as we will need to create the coverage profile and k-mer spectrum before running MetaBinner.
 
 1. Generate coverage profiles
@@ -57,8 +59,8 @@ Basically, we need to calculate the frequency of every k-mer for `k=4` in each o
 since we are dealing with such a small test dataset. You can also specify the k-mer size, but _please_ do not try it for any `k>4`, the implementation is a brute force enumeration of k-mers, and [much](https://gatb.inria.fr/software/dsk/), [more](http://www.genome.umd.edu/jellyfish.html), [efficient](https://khmer.readthedocs.io/en/latest/), [methods](https://github.com/refresh-bio/KMC), [exist](https://github.com/uni-halle/gerbil), [for](https://github.com/pmelsted/BFCounter), [larger](https://sourceforge.net/projects/kanalyze/), [k-sizes](http://grafia.cs.ucsb.edu/msp/download.html).
 We will make the 4-mer frequency spectrums for both assemblies:
 ```bash
-python scripts/MetaBinner/scripts/gen_kmer.py data/MEGAHIT_default_contigs.fasta 250 4
-python scripts/MetaBinner/scripts/gen_kmer.py data/GATB_default_contigs.fasta 250 4
+python scripts/MetaBinner/scripts/gen_kmer.py data/MEGAHIT_default_contigs.fasta 250 4; mv data/kmer_4_f250.csv output/on_MEGAHIT/kmer_4_f250.csv
+python scripts/MetaBinner/scripts/gen_kmer.py data/GATB_default_contigs.fasta 250 4; mv data/kmer_4_f250.csv output/on_GATB/kmer_4_f250.csv
 ```
 
 3. Filter out short contigs
@@ -68,3 +70,4 @@ MetaBinner provides a script to do this, but here's a much faster way to do it:
 awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/GATB_default_contigs_longer.fasta
 awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
 ```
+### Running the tool
