@@ -165,6 +165,11 @@ quast -o quast_out `#<<-- specify the output folder` \
   final.contigs.fa `#<<-- the input assembly`
  
 ```
+Note: running this in a single line without the comments looks like:
+```
+quast -o quast_out -m 250 --circos --glimmer --rna-finding --single ../../data/SRS014464-Anterior_nares.fasta final.contigs.fa
+```
+
 If you download the QUAST report, you can view it in a browser by clicking the `report.html` tag. It should look something like this:
 ![quast](https://user-images.githubusercontent.com/6362936/128277768-bb09a609-6a67-4997-8812-12202d19ec19.PNG)
 
