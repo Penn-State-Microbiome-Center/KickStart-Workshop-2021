@@ -65,3 +65,5 @@ And view the output:
 **How does this assembly compare to the previous ones?**
 
 **Try BLASTing the longest contig. Any guesses where this contig might be from?**
+
+# Please proceed to the [Binning](Binning.md) section
