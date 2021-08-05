@@ -86,6 +86,12 @@ However, the main ones we will be concerned with are specifying if the input dat
 or `-r` single-end, as well as the specification of the output directory with `-o`.
 
 ### File directory setup and data acquisition 
+Let's make a top-level directory for our analysis:
+```
+mkdir MEGAHIT_Analysis
+cd MEGAHIT_Analysis
+```
+
 As usual, we will make `data`, `scripts`, and `output` directories:
 ```
 mkdir data scripts output
@@ -182,3 +188,6 @@ chmod +x run_quast.sh
 ./run_quast.sh
 ```
 
+Now that we have run all the analyses, let's compare their results by downloading the associated output folders and viewing the html output.
+**Can you tell which of the assemblies was the best from viewing the reports?**
+**In which situations would the different MEGAHIT parameter settings be useful?**
