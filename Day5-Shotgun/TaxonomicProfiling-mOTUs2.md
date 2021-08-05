@@ -1,4 +1,4 @@
-**mOTUs2 Tutorial**
+# mOTUs2 Tutorial
 ===========================
 
 [mOTUs2](https://motu-tool.org/index.html) is a tool for profiling the taxonomic composition of microbial communities from metagenomic
@@ -7,12 +7,12 @@ shotgun sequencing data.
 This tool has a good balance of sensitivity and specificity. It is based on marker genes, but in contrast to MetaPhlAn, it uses single nucleotide variants in the marker genes
 which leads to higher sensitivity.
 
-# Installation
+# Installation and setup
 - Activate conda on Roar: `module load anaconda3`
 - Create the environment: `conda create -y --name motus2 -c bioconda motus`
 - Start the environment: `conda activate motus2`
 
-# Obtaining test data:
+## Obtaining test data:
 - Make analysis folder: `mkdir mOTUs_Analysis`
 - `cd mOTUs_Analysis`
 - `mkdir data`
@@ -21,20 +21,20 @@ which leads to higher sensitivity.
 - Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
 - `cd ..`
 
-# Create folder directory
+## Create folder directory
 - `mkdir output`
 - `mkdir scripts`
 - `cd scripts`
 - `vim run_motus.sh`
 
-------------------------------------------------------------------------
-**Create taxonomic profiles**
------------------------------
+
+# Create taxonomic profiles
+
 mOTUs2 accepts as input short reads from a single shotgun
 metagenomic sequencing experiment and outputs the list of detected
 microbes and their relative abundances. 
 
-### **Input files**
+## **Input files**
 
 MetaPhlAn accepts metagenomic sequences in `.fastq`, `.sam`, or `.bam` formats.
 
@@ -100,7 +100,7 @@ For our purposes, the most important parameter is `-C` which specifies the CAMI 
 
 Since we now have practice running multiple samples, let's jump straight to:
 
-### **Run multiple samples**
+## **Run multiple samples**
 
 Let's run, in parallel, all the samples through mOTUs2. Put the following code in a file called `run_motus.sh`:
 
@@ -122,7 +122,7 @@ Let's run, in parallel, all the samples through mOTUs2. Put the following code i
 
 And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
 
-## **Comparing differences between tools**
+# **Comparing differences between tools**
 
 Now that we have run both mOTUs2 and MetaPhlAn3 on the same data, we can compare the differences between these tools. Using TAMPA (which we installed previously) we can do this.
 ```
