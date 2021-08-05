@@ -49,8 +49,8 @@ MetaBinner requires a bit more manual work as we will need to create the coverag
 
 This will map the reads back to the assembled contigs to get an idea of the read coverage per contig. Let's do this for both the MEGAHIT and GATB assemblies:
 ```
-bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/MEGAHIT_default_contigs.fasta -o output/on_MEGAHIT -t 4 -m 40 --single-end data/SRS014464-Anterior_nares.fastq
-bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/GATB_default_contigs.fasta -o output/on_GATB -t 4 -m 40 --single-end data/SRS014464-Anterior_nares.fastq
+bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/MEGAHIT_default_contigs.fasta -o output/on_MEGAHIT -t 4 -m 40 -l 250 --single-end data/SRS014464-Anterior_nares.fastq
+bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/GATB_default_contigs.fasta -o output/on_GATB -t 4 -m 40 -l 250 --single-end data/SRS014464-Anterior_nares.fastq
 ```
 
 2. Generate 4-mer frequency spectrum
@@ -67,7 +67,27 @@ python scripts/MetaBinner/scripts/gen_kmer.py data/GATB_default_contigs.fasta 25
 
 MetaBinner provides a script to do this, but here's a much faster way to do it:
 ```
+awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/MEGAHIT_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
 awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/GATB_default_contigs_longer.fasta
-awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
 ```
 ### Running the tool
+
+```
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
+
+baseDir=/home/dmk333/KickStartWorkshop2021/MetaBinner_analysis/
+# Full MetaBinner Path
+metabinnerPath=${baseDir}/scripts/MetaBinner
+
+#path to the input files for MetaBinner and the output dir:
+contigFile=${baseDir}/data/MEGAHIT_default_contigs_longer.fasta
+outputDir=${baseDir}/output/on_MEGAHIT
+coverageProfiles=${baseDir}/output/on_MEGAHIT/coverage_profile.tsv
+kmerProfile=${baseDir}/output/on_MEGAHIT/kmer_4_f250.csv
+
+
+bash ${metabinnerPath}/run_metabinner.sh -a ${contigFile} -o ${outputDir} -d ${coverageProfiles} -k ${kmerProfile} -p ${metabinnerPath}
+```
+
