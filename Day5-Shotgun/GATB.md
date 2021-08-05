@@ -33,4 +33,15 @@ cd ..
 
 ## Running GATB
 
-To run the GATB pipeline with default settings, we can do the following
+To run the GATB pipeline with default settings, we can do the following:
+```
+cd output
+python2 ../scripts/gatb-pipeline-1.171/gatb -s ../data/SRS014464-Anterior_nares.fasta -o default
+```
+Note that GATB wants an output _prefix_ as opposed to an output folder. This is why we need to be in the output directory when we call GATB.
+If we wanted to, we could run GATB on all the data, but for the sake of time, let's stick with just this one sample.
+
+As with the other tools, the final contigs (or scaffolds, in this case) are contained in a single file called `output.fasta`. We will next use QUAST to get some stats 
+about the quality of this assembly.
+
+## Assess the assembly quality
