@@ -6,14 +6,16 @@ MetaBinner is an ensemble-based approach to genome binning, originating in 2019.
 # Installation and setup
 
 ## File directory setup and data acquisition
-We will use the usual file structure and data:
+We will use the usual file structure and copy over the data from both the GATB and MEGAHIT analysis:
 ```
 mkdir MetaBinner_analysis
 cd MetaBinner_analysis
 mkdir data scripts output
 cd data
-wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt  #<<--TODO: change to single file if needed
 ls *.gz | xargs -P6 -I{} gunzip {}
+cp ../../MEGAHIT_analysis/output/default/final.contigs.fa MEGAHIT_default_contigs.fasta
+cp ../../GATB_analysis/output/default.fasta GATB_default_contigs.fasta
 cd ..
 ```
 
@@ -26,7 +28,7 @@ git clone https://github.com/ziyewang/MetaBinner.git
 cd MetaBinner
 conda env create -f metabinner_env.yaml
 conda activate metabinner_env  #<<-- note that we did not give this name to the environment; the name is contained in the yaml file itself.
-conda install -y -c bioconda prodigal hmmer pplacer
+conda install -y -c bioconda prodigal hmmer pplacer pandas
 cd CheckM-1.0.18
 python setup.py install
 mkdir checkm_data
@@ -37,3 +39,32 @@ checkm data setRoot .
 cd ../..
 ```
 Please note that this is a Linux-specific installation, but the developers are [working](https://github.com/ziyewang/MetaBinner/issues/4) on a cross-platform installation method (i.e. conda).
+
+## Running MetaBinner
+MetaBinner requires a bit more manual work as we will need to create the coverage profile and k-mer spectrum before running MetaBinner.
+
+1. Generate coverage profiles
+
+This will map the reads back to the assembled contigs to get an idea of the read coverage per contig. Let's do this for both the MEGAHIT and GATB assemblies:
+```
+bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/MEGAHIT_default_contigs.fasta -o output/on_MEGAHIT -t 4 -m 40 --single-end data/SRS014464-Anterior_nares.fastq
+bash scripts/MetaBinner/scripts/gen_coverage_file.sh -a data/GATB_default_contigs.fasta -o output/on_GATB -t 4 -m 40 --single-end data/SRS014464-Anterior_nares.fastq
+```
+
+2. Generate 4-mer frequency spectrum
+
+Basically, we need to calculate the frequency of every k-mer for `k=4` in each of the contigs. There is an option to ignore shorter contigs, so we will set this really low 
+since we are dealing with such a small test dataset. You can also specify the k-mer size, but _please_ do not try it for any `k>4`, the implementation is a brute force enumeration of k-mers, and [much](https://gatb.inria.fr/software/dsk/), [more](http://www.genome.umd.edu/jellyfish.html), [efficient](https://khmer.readthedocs.io/en/latest/), [methods](https://github.com/refresh-bio/KMC), [exist](https://github.com/uni-halle/gerbil), [for](https://github.com/pmelsted/BFCounter), [larger](https://sourceforge.net/projects/kanalyze/), [k-sizes](http://grafia.cs.ucsb.edu/msp/download.html).
+We will make the 4-mer frequency spectrums for both assemblies:
+```bash
+python scripts/MetaBinner/scripts/gen_kmer.py data/MEGAHIT_default_contigs.fasta 250 4
+python scripts/MetaBinner/scripts/gen_kmer.py data/GATB_default_contigs.fasta 250 4
+```
+
+3. Filter out short contigs
+
+MetaBinner provides a script to do this, but here's a much faster way to do it:
+```
+awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/GATB_default_contigs_longer.fasta
+awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
+```
