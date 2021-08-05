@@ -190,4 +190,5 @@ chmod +x run_quast.sh
 
 Now that we have run all the analyses, let's compare their results by downloading the associated output folders and viewing the html output.
 **Can you tell which of the assemblies was the best from viewing the reports?**
+
 **In which situations would the different MEGAHIT parameter settings be useful?**
