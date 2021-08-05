@@ -1,3 +1,12 @@
+- [MEGAHIT](#megahit)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [File directory setup and data acquisition](#file-directory-setup-and-data-acquisition)
+    - [Running MEGAHIT](#running-megahit)
+  - [Analyzing the assembly](#analyzing-the-assembly)
+    - [Installing QUAST](#installing-quast)
+    - [Running QUAST](#running-quast)
+
 # MEGAHIT
 
 MEGAHIT is a _de novo_ assembler first introduced in 2015 which has been continually updated since then. It utilizes mutliple k-mer sizes when building a de Bruijn graph 
