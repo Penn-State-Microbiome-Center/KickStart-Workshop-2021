@@ -34,7 +34,7 @@ mOTUs2 accepts as input short reads from a single shotgun
 metagenomic sequencing experiment and outputs the list of detected
 microbes and their relative abundances. 
 
-## **Input files**
+## Input files
 
 MetaPhlAn accepts metagenomic sequences in `.fastq`, `.sam`, or `.bam` formats.
 
@@ -100,7 +100,7 @@ For our purposes, the most important parameter is `-C` which specifies the CAMI 
 
 Since we now have practice running multiple samples, let's jump straight to:
 
-## **Run multiple samples**
+## Run multiple samples
 
 Let's run, in parallel, all the samples through mOTUs2. Put the following code in a file called `run_motus.sh`:
 
@@ -122,7 +122,7 @@ Let's run, in parallel, all the samples through mOTUs2. Put the following code i
 
 And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
 
-# **Comparing differences between tools**
+# Comparing differences between tools
 
 Now that we have run both mOTUs2 and MetaPhlAn3 on the same data, we can compare the differences between these tools. Using TAMPA (which we installed previously) we can do this.
 ```
@@ -141,7 +141,7 @@ You should then see a file like the following:
 
 So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let's investigate why this is the case.
 
-## **Supporting evidence**
+## Supporting evidence
 let's chase down how mOTUs2 infered that Actinobacteris is present in the sample. Using the `-c` flag, we can indicate that we want read counts instead of relative 
 abundances. We can also save the alignment BAM file with `-I` and the mOTU read counts with `-M` in the following fashion:
 
