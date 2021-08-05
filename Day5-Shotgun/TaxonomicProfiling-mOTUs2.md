@@ -1,3 +1,14 @@
+- [mOTUs2 Tutorial](#motus2-tutorial)
+- [Installation and setup](#installation-and-setup)
+  - [Obtaining test data:](#obtaining-test-data)
+  - [Create folder directory](#create-folder-directory)
+- [Create taxonomic profiles](#create-taxonomic-profiles)
+  - [Input files](#input-files)
+  - [Run multiple samples](#run-multiple-samples)
+- [Comparing differences between tools](#comparing-differences-between-tools)
+  - [Supporting evidence](#supporting-evidence)
+
+
 # mOTUs2 Tutorial
 ===========================
 
