@@ -36,7 +36,7 @@ cd checkm_data
 wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
 tar -xzf checkm_data_2015_01_16.tar.gz 
 checkm data setRoot .
-cd ../..
+cd ../../../..
 ```
 Please note that this is a Linux-specific installation, but the developers are [working](https://github.com/ziyewang/MetaBinner/issues/4) on a cross-platform installation method (i.e. conda).
 
