@@ -629,3 +629,5 @@ the file using a command like `see merged_abundance.png`).
     take advantage of them)?**
 
 ------------------------------------------------------------------------
+
+# Please proceed to the [mOTUs2 Section](TaxonomicProfiling-mOTUs2.md)
