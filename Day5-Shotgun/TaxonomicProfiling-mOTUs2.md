@@ -182,3 +182,5 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
  HWI-EAS109_102883399:3:86:17435:12622.lane0.single      16      refMG0011662.COG0172    95      0       100M <snip>
  ```
 Meaning there's a 100bp match, so it really does look like Actinobacteria is in there!
+
+# Please proceed to the [Assembly](Assembly.md) section
