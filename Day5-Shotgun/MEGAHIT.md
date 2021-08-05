@@ -205,3 +205,5 @@ Now that we have run all the analyses, let's compare their results by downloadin
 **Can you tell which of the assemblies was the best from viewing the reports?**
 
 **In which situations would the different MEGAHIT parameter settings be useful?**
+
+# Please proceed to the [GATB](GATB.md) section
