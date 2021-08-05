@@ -1,10 +1,15 @@
 # GATB
+- [GATB](#gatb)
+  - [Installation and setup](#installation-and-setup)
+  - [Running GATB](#running-gatb)
+  - [Assess the assembly quality](#assess-the-assembly-quality)
+
 GATB, aka The Genome Analysis Toolbox with de-Bruijn Graph is a quite flexible toolkit of various genomic analysis tools. check out their [software](https://gatb.inria.fr/software/) 
 page if you would like to count k-mers in, error correct, assemble, compare, etc. genomic and metagenomic samples. One of the main authors of this toolkit is Rayan Chikhi, a 
 former postdoc of Paul Medvedev's (CSE & BMB)!
 
 While there are a lot of different goodies we could look at, we will focus just on their pipeline for _de novo_ metagenome assembly which combines the tools of 
-[Bloocoo](https://gatb.inria.fr/software/bloocoo/) error correction, [Minia](https://github.com/ksahlin/BESST) assembly, and [BESST](https://gatb.inria.fr/software/minia/) scaffolding.
+[Bloocoo](https://gatb.inria.fr/software/bloocoo/) error correction, [Minia](https://github.com/ksahlin/BESST) assembly, and [BESST](https://gatb.inria.fr/software/minia/) scaffolding. Similar to MEGAHIT, the core assembler Minia is a multi-k-mer size assembler.
 
 ## Installation and setup
 Let's use the usual folder structure
