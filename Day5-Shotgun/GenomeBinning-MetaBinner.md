@@ -10,7 +10,7 @@ We will use the usual file structure and copy over the data from both the GATB a
 ```
 mkdir MetaBinner_analysis
 cd MetaBinner_analysis
-mkdir data scripts output
+mkdir data scripts output data/on_MEGAHIT data/on_GATB
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt  #<<--TODO: change to single file if needed
 ls *.gz | xargs -P6 -I{} gunzip {}
@@ -47,10 +47,10 @@ MetaBinner requires a bit more manual work as we will need to create the coverag
 
 1. Filter out short contigs
 
-MetaBinner provides a script to do this, but here's a much faster way to do it:
+MetaBinner provides a script to do this, but here's a much faster way to do it. _Note_ if you were doing this on real data, you would want to replace the `250` with something like `1000`.
 ```
-awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/MEGAHIT_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
-awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "n" s}' data/GATB_default_contigs.fasta > data/GATB_default_contigs_longer.fasta
+awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "\n" s}' data/MEGAHIT_default_contigs.fasta > data/MEGAHIT_default_contigs_longer.fasta
+awk '!/^>/{next}{getline s} length(s) >= 250 { print $0 "\n" s}' data/GATB_default_contigs.fasta > data/GATB_default_contigs_longer.fasta
 ```
 
 2. Generate coverage profiles
