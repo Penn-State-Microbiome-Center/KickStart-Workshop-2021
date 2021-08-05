@@ -151,6 +151,9 @@ quast -o quast_out `#<<-- specify the output folder` \
   final.contigs.fa `#<<-- the input assembly`
  
 ```
+If you download the QUAST report, you can view it in a browser by clicking the `report.html` tag. It should look something like this:
+![quast](https://user-images.githubusercontent.com/6362936/128277768-bb09a609-6a67-4997-8812-12202d19ec19.PNG)
+
 
 Let's go ahead and run QUAST on each of the assemblies. We will create a file that will automatically create a QUAST report for each of the assemblies.
 ```
