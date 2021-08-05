@@ -119,5 +119,62 @@ In practice, this _can_ result in the assembly of high abundance organisms. Inve
 I.e. you may get a bunch of really short contigs.
 
 ```
-megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/ksize11-51-10 --k-min 11 --k-max 51 --k-step 10
+megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/ksize15-51-10 --k-min 15 --k-max 51 --k-step 10
 ```
+
+## Analyzing the assembly
+
+Now that we've assembled one of these samples, let's go ahead and run some basic statistics on it. [QUAST](http://bioinf.spbau.ru/quast) is the premier genomic and metagenomic 
+assembly assessment package. If you provide it a reference, it can can provide you quite a bit of insightful information as to the quality of your assembly. Even without 
+a reference though, you can still use it to gain some insight into your assembly.
+
+### Installing QUAST
+To install QUAST, we simply need to run:
+```
+conda deactivate
+conda create -y -c bioconda -n quast quast bwa bedtools
+conda activate quast
+```
+
+### Running QUAST
+There are a number of different ways to run QUAST, but since we are doing _de novo_ metagenome assembly, we do not have a reference to compare to. As such, we can just run QUAST 
+to get some insight about the basic assembly quality.
+
+MEGAHIT returns a main `final.contigs.fa` in the output directory which contains the assembled contigs. As such, we can run quast on a single assembly in the following way:
+```
+quast -o quast_out `#<<-- specify the output folder` \
+ -m 250 `#<<-- consider 250bp+ as a contig` \
+ --circos `#<<-- make a circos plot` \
+ --glimmer `#<<-- use glimmer to predict genes (note: you should use -mgm (MetaGeneMark) instead, but we would need everyone to agree to a license and download it, so we aren't doing that here` \
+ --rna-finding `#<<-- try to find ribosomal RNA genes` \
+ --single ../../data/SRS014464-Anterior_nares.fasta `#<-- tell QUAST where the reads were so you can map it back to the assembly` \
+  final.contigs.fa `#<<-- the input assembly`
+ 
+```
+
+Let's go ahead and run QUAST on each of the assemblies. We will create a file that will automatically create a QUAST report for each of the assemblies.
+```
+cd ../scripts
+vim run_quast.sh
+# Copy the following into that file: ":a<enter>, paste, :w!<enter>m :<shift>zz"
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
+
+baseFolder="/home/dmk333/KickStartWorkshop2021/MEGAHIT_Analysis"  #<<---- replace with your base directory
+outputFolder="${baseFolder}/output"
+
+# Now analyze everything in one go
+inputFolder="${baseFolder}/output/"
+for file in `ls -d */ output/`;
+do
+	quast -o quast_out -m 250 --circos --glimmer --rna-finding --single ../../data/SRS014464-Anterior_nares.fasta final.contigs.fa `#<<-- the input assembly`
+  motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
+done
+```
+Then make it executable and run it:
+```
+chmod +x run_quast.sh
+./run_quast.sh
+```
+
