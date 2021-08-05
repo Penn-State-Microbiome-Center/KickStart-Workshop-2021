@@ -2,37 +2,6 @@
 **MetaPhlAn 3.0 Tutorial**
 ===========================
 Borrowing heavily from [here](https://github.com/biobakery/biobakery/wiki/metaphlan3).
-
-[MetaPhlAn](https://github.com/biobakery/MetaPhlAn/tree/3.0) is a tool
-for profiling the taxonomic composition of microbial communities from metagenomic
-shotgun sequencing data.
-
-This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
-
-# Installation
-- Activate conda on Roar: `module load anaconda3`
-- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
-- Start the environment: `conda activate metaphlan`
-
-# Obtaining test data:
-- Make analysis folder: `mkdir MetaPhlAn_Analysis`
-- `cd MetaPhlAn_Analysis`
-- `mkdir data`
-- `cd data`
-- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt`
-- Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
-- `cd ..`
-
-# Create folder directory
-- `mkdir output`
-- `mkdir scripts`
-- `cd scripts`
-- `vim run_metaphlan.sh`
-------------------------------------------------------------------------------------
-
-Table of contents
-===================
-
 - [**Overview**](#overview)
 - [**Create taxonomic profiles**](#create-taxonomic-profiles)
   * [**Input files**](#input-files)
@@ -46,6 +15,33 @@ Table of contents
   * [**Simple Vizualization with TAMPA**](#simple-vizualization-with-tampa)
   * [**Create a heatmap with hclust2**](#create-a-heatmap-with-hclust2)
   * [**Create a cladogram with GraPhlAn**](#create-a-cladogram-with-graphlan)
+
+[MetaPhlAn](https://github.com/biobakery/MetaPhlAn/tree/3.0) is a tool
+for profiling the taxonomic composition of microbial communities from metagenomic
+shotgun sequencing data.
+
+This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
+
+# Installation
+- Activate conda on Roar: `module load anaconda3`
+- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
+- Start the environment: `conda activate metaphlan`
+
+# Set up directories and obtain the test data:
+- Make analysis folders:
+```
+mkdir MetaPhlAn_analysis  #<<-- main analysis folder
+cd MetaPhlAn_analysis  #<<-- go inside this folder
+mkdir data output scripts  #<<-- make three directories: data, output, and scripts
+```
+Then download the data
+
+```
+cd data
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt  #<<-- downloads the data from github
+ls *.gz | xargs -P6 -I{} gunzip {}  #<<-- decompresses the data in parallel
+cd ..  #<<-- move back up a directory
+```
 
 ------------------------------------------------------------------------
 ## **Overview**
@@ -186,7 +182,7 @@ Output:
 
     #mpa_v30_CHOCOPhlAn_201901
     #/n/huttenhower_lab/tools/metaphlan3/bin/metaphlan SRS014476-Supragingival_plaque.fasta.gz --input_type fasta
-    #SampleID       Metaphlan_Analysis
+    #SampleID       Metaphlan_analysis
     #clade_name     NCBI_tax_id     relative_abundance      additional_species
     k__Bacteria     2       100.0   
     k__Bacteria|p__Actinobacteria   2|201174        100.0   
@@ -393,10 +389,10 @@ conda activate tampa
 ```
 You can then view the output by running the following:
 ```bash
- python TAMPA/src/profile_to_plot.py -i MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  -g MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -b Anterior_nares -nm genus
+ python TAMPA/src/profile_to_plot.py -i MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile  -g MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile -b Anterior_nares -nm genus
 ```
-This will create a file `Anterior_nares_tree_genus_Metaphlan_Analysis.png` which you can transfer back to your device and view. It should look like the following:
-![Anterior_nares_tree_genus_Metaphlan_Analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
+This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
+![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
 
 Note that TAMPA was originally designed for pairwise comparison of profiles (tool vs. tool, or tool vs. ground truth), hence the funky display.
 
