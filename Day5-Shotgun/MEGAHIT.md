@@ -96,8 +96,8 @@ or `-r` single-end, as well as the specification of the output directory with `-
 ### File directory setup and data acquisition 
 Let's make a top-level directory for our analysis:
 ```
-mkdir MEGAHIT_Analysis
-cd MEGAHIT_Analysis
+mkdir MEGAHIT_analysis
+cd MEGAHIT_analysis
 ```
 
 As usual, we will make `data`, `scripts`, and `output` directories:
@@ -184,7 +184,7 @@ vim run_quast.sh
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-baseFolder="/home/dmk333/KickStartWorkshop2021/MEGAHIT_Analysis"  #<<---- replace with your base directory
+baseFolder="/home/dmk333/KickStartWorkshop2021/MEGAHIT_analysis"  #<<---- replace with your base directory
 outputFolder="${baseFolder}/output"
 
 # Now analyze everything in one go
