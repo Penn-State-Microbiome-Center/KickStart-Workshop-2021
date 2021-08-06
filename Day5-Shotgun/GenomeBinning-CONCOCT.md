@@ -81,7 +81,7 @@ samtools sort output/on_MEGAHIT/SRS014464-Anterior_nares.bam -o output/on_MEGAHI
 samtools index output/on_MEGAHIT/SRS014464-Anterior_nares.sorted.bam
 ```
 
-2. Cut up the contigs
+2. **Cut up the contigs**
 
 CONCOCT suggest cutting your contigs into smaller, 10 Kbp chunks (so the PCA works better) but since we have such short contigs with our demo data, let's do 1 Kbp chunks instead:
 
@@ -89,7 +89,7 @@ CONCOCT suggest cutting your contigs into smaller, 10 Kbp chunks (so the PCA wor
 cut_up_fasta.py data/MEGAHIT_default_contigs_longer.fasta -c 1000 -o 0 --merge_last -b output/on_MEGAHIT/contigs_1000.bed > output/on_MEGAHIT/contigs_1000.fa
 ```
 
-3. Generate the coverage information
+3. **Generate the coverage information**
 
 Now we need to keep track of where the alignments to the original contigs went when we cut things up into smaller chunks. The following script does that for us:
 ```bash
@@ -150,4 +150,24 @@ Of note are the following parameters: `--clusters <num_clusters>` this specifies
 Let's go ahead an just use the default settings (always a good starting point):
 ```
 concoct --composition_file output/on_MEGAHIT/contigs_1000.fa --coverage_file output/on_MEGAHIT/coverage_table.tsv -b output/on_MEGAHIT/ --threads 4
+```
+
+### Post-processing
+
+Now that CONCOCT has done its thing, let's get the output into a more useful format. Specifically, it would be nice if each bin was in its own FASTA file. That way, we could use [CheckM](https://ecogenomics.github.io/CheckM/) and/or [BUSCO](https://busco.ezlab.org/) to check for conserved genes in each bin, look for contamination, etc. After that, we could then use a prokaryote gene finder like [GeneMarkS](http://opal.biology.gatech.edu/GeneMark/) or [MetaGeneMark](http://exon.gatech.edu/meta_gmhmmp.cgi) (but don't use the web versions, these tools come packaged in other platforms, eg. even QUAST has these inside of it).
+
+1. **Undo the cutting up**
+
+Now that we've binned the "cut up" contigs, we can do the following to merge the pieces back together:
+```bash
+merge_cutup_clustering.py output/on_MEGAHIT/clustering_gt1000.csv > output/on_MEGAHIT/clustering_merged.csv
+```
+Note that missassemblies can result in different 1Kbp pieces ending up in different bins (this can be ok and can be thought of as "undoing" the missassembly).
+
+2. **Put each bin in its own FASTA file**
+
+Now we can place each bin in its own FASTA file, easing downstream analysis:
+```bash
+mkdir output/on_MEGAHIT/fasta_bins
+extract_fasta_bins.py data/MEGAHIT_default_contigs.fasta output/on_MEGAHIT/clustering_merged.csv --output_path output/on_MEGAHIT/fasta_bins
 ```
