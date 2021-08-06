@@ -10,7 +10,7 @@ We will use the usual file structure and copy over the data from both the GATB a
 ```
 mkdir MetaBinner_analysis
 cd MetaBinner_analysis
-mkdir data scripts output data/on_MEGAHIT data/on_GATB
+mkdir data scripts output output/on_MEGAHIT output/on_GATB
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt  #<<--TODO: change to single file if needed
 ls *.gz | xargs -P6 -I{} gunzip {}
