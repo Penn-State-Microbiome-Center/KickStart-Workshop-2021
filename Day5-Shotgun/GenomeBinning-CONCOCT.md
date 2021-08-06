@@ -154,10 +154,9 @@ For sake of time, let's just use the [NCBI BLAST website](https://blast.ncbi.nlm
 
 ## Putting it all together
 
-Let's now put everything into a script so we can run it with a single command. As usual, we will place this in a bash script and make it executable. Let's call the file `run_CONCOCT.sh` and put the following inside of it:
+Let's now put everything into a script so we can run it with a single command. As usual, we will place this in a bash script in the `scripts` folder and make it executable. Let's call the file `run_CONCOCT.sh` and put the following inside of it:
 
-```
-#!/bin/bash
+```#!/bin/bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
@@ -177,6 +176,8 @@ awk '!/^>/{next}{getline s} length(s) >= 1 { print $0 "\n" s s s s s}' $assembly
 
 # align
 readsFileNoExt=$(echo $readsFile | cut -d'.' -f1)
+readsFileNoExt=$(basename $readsFileNoExt)
+mkdir -p $outFolder
 bwa index $longerAssemblyFile
 bwa mem -t 4 $longerAssemblyFile $readsFile > ${outFolder}/${readsFileNoExt}.sam
 samtools view -S -b ${outFolder}/${readsFileNoExt}.sam > ${outFolder}/${readsFileNoExt}.bam
@@ -186,7 +187,7 @@ samtools index ${outFolder}/${readsFileNoExt}.sorted.bam
 # Run preproc and concoct
 cut_up_fasta.py $longerAssemblyFile -c $cutLength -o 0 --merge_last -b ${outFolder}/contigs_${cutLength}.bed > ${outFolder}/contigs_${cutLength}.fa
 concoct_coverage_table.py ${outFolder}/contigs_${cutLength}.bed ${outFolder}/${readsFileNoExt}.sorted.bam >${outFolder}/coverage_table.tsv
-concoct --composition_file ${outFolder}/contigs_${cutLength}.fa ${outFolder}/coverage_table.tsv -b ${outFolder} --threads 4
+concoct --composition_file ${outFolder}/contigs_${cutLength}.fa --coverage_file ${outFolder}/coverage_table.tsv -b ${outFolder} --threads 4
 
 # Post proc
 merge_cutup_clustering.py ${outFolder}/clustering_gt1000.csv > ${outFolder}/clustering_merged.csv
@@ -196,7 +197,8 @@ extract_fasta_bins.py $longerAssemblyFile ${outFolder}/clustering_merged.csv --o
 
 We can run this script with the following commands to make it work on the GATB assembly:
 ```bash
-run_CONCOCT.sh -a data/GATB_default_contigs.fasta -r data/SRS014464-Anterior_nares.fastq -l 1000 -o output/on_GATB
+cd ..  #<<-- if you aren't already in the base directory CONCOCT_analysis
+./scripts/run_CONCOCT.sh -a data/GATB_default_contigs.fasta -r data/SRS014464-Anterior_nares.fastq -l 1000 -o output/on_GATB
 ```
 
-
+# Please now go to the [next section](TaxonomicBinning-Kraken2.md)
