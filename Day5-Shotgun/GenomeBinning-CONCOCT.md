@@ -18,6 +18,7 @@ wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart
 ls *.gz | xargs -P6 -I{} gunzip {}
 cp ../../MEGAHIT_analysis/output/default/final.contigs.fa MEGAHIT_default_contigs.fasta
 cp ../../GATB_analysis/output/default.fasta GATB_default_contigs.fasta
+cd ..
 ```
 
 Note that since we are using a _very_ small demonstration sample, CONCOCT (and actually, each binning tool I tried) will say there are no bins at all. So we must artificially increase our contig lengths. The following takes each contig and copies it 5 times:
@@ -36,6 +37,7 @@ conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 conda create -n concoct_env -y python=3 concoct mkl
+conda activate concoct_env
 ```
 
 ## Running CONCOCT
@@ -146,3 +148,6 @@ Now we can place each bin in its own FASTA file, easing downstream analysis:
 mkdir output/on_MEGAHIT/fasta_bins
 extract_fasta_bins.py data/MEGAHIT_default_contigs.fasta output/on_MEGAHIT/clustering_merged.csv --output_path output/on_MEGAHIT/fasta_bins
 ```
+
+## Analyzing the bins
+For sake of time, let's just use the [NCBI BLAST website](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to take a look at one of the bins. Please **_DO NOT DO THIS WITH REAL DATA_**. The [next section](TaxonomicBinning-Kraken2.md) gives a much better and more accurate way to do this. But in any case, let's take a look at the bin `1.fa`. Any guesses what organism this bin originates from? What could we have done differently to avoid this sort of situation? (hint: [this tool](https://github.com/benjjneb/decontam) or perhaps [this one](https://github.com/bxlab/metaWRAP/blob/master/Module_descriptions.md#read_qc), or [that one](http://deconseq.sourceforge.net/)).
