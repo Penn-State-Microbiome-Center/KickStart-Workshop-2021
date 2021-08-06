@@ -10,6 +10,7 @@
   - [Run multiple samples](#run-multiple-samples)
 - [Comparing differences between tools](#comparing-differences-between-tools)
   - [Supporting evidence](#supporting-evidence)
+
 [mOTUs2](https://motu-tool.org/index.html) is a tool for profiling the taxonomic composition of microbial communities from metagenomic
 shotgun sequencing data.
 
