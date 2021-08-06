@@ -151,3 +151,52 @@ extract_fasta_bins.py data/MEGAHIT_default_contigs.fasta output/on_MEGAHIT/clust
 
 ## Analyzing the bins
 For sake of time, let's just use the [NCBI BLAST website](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to take a look at one of the bins. Please **_DO NOT DO THIS WITH REAL DATA_**. The [next section](TaxonomicBinning-Kraken2.md) gives a much better and more accurate way to do this. But in any case, let's take a look at the bin `1.fa`. Any guesses what organism this bin originates from? What could we have done differently to avoid this sort of situation? (hint: [this tool](https://github.com/benjjneb/decontam) or perhaps [this one](https://github.com/bxlab/metaWRAP/blob/master/Module_descriptions.md#read_qc), or [that one](http://deconseq.sourceforge.net/)).
+
+## Putting it all together
+
+Let's now put everything into a script so we can run it with a single command. As usual, we will place this in a bash script and make it executable. Let's call the file `run_CONCOCT.sh` and put the following inside of it:
+
+```
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
+
+while getopts a:r:o:l: flag
+do
+    case "${flag}" in
+        a) assemblyFile=${OPTARG};;
+        r) readsFile=${OPTARG};;
+        o) outFolder=${OPTARG};;
+        l) cutLength=${OPTARG};;
+    esac
+done
+
+# DON'T DO THIS FOR REAL DATA (it's just a way to fake longer contigs)
+longerAssemblyFile=$(echo $assemblyFile | cut -d'.' -f1)_longer.fasta
+awk '!/^>/{next}{getline s} length(s) >= 1 { print $0 "\n" s s s s s}' $assemblyFile > $longerAssemblyFile
+
+# align
+readsFileNoExt=$(echo $readsFile | cut -d'.' -f1)
+bwa index $longerAssemblyFile
+bwa mem -t 4 $longerAssemblyFile $readsFile > ${outFolder}/${readsFileNoExt}.sam
+samtools view -S -b ${outFolder}/${readsFileNoExt}.sam > ${outFolder}/${readsFileNoExt}.bam
+samtools sort ${outFolder}/${readsFileNoExt}.bam -o ${outFolder}/${readsFileNoExt}.sorted.bam
+samtools index ${outFolder}/${readsFileNoExt}.sorted.bam
+
+# Run preproc and concoct
+cut_up_fasta.py $longerAssemblyFile -c $cutLength -o 0 --merge_last -b ${outFolder}/contigs_${cutLength}.bed > ${outFolder}/contigs_${cutLength}.fa
+concoct_coverage_table.py ${outFolder}/contigs_${cutLength}.bed ${outFolder}/${readsFileNoExt}.sorted.bam >${outFolder}/coverage_table.tsv
+concoct --composition_file ${outFolder}/contigs_${cutLength}.fa ${outFolder}/coverage_table.tsv -b ${outFolder} --threads 4
+
+# Post proc
+merge_cutup_clustering.py ${outFolder}/clustering_gt1000.csv > ${outFolder}/clustering_merged.csv
+mkdir ${outFolder}/fasta_bins
+extract_fasta_bins.py $longerAssemblyFile ${outFolder}/clustering_merged.csv --output_path ${outFolder}/fasta_bins
+```
+
+We can run this script with the following commands to make it work on the GATB assembly:
+```bash
+run_CONCOCT.sh -a data/GATB_default_contigs.fasta -r data/SRS014464-Anterior_nares.fastq -l 1000 -o output/on_GATB
+```
+
+
