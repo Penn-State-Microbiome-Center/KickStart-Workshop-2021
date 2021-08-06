@@ -11,7 +11,7 @@ were top performers in the recent [CAMI2 competition](https://www.biorxiv.org/co
 
 1. [MEGAHIT](MEGAHIT.md)
 2. [GATB](GATB.md)
-3. [HipMer](HipMer.md)
+
 
 Since we do not want to wait hours/days to complete assemblies, we will be using extremely small data sets. This might give you the impression that the tools are not 
 resource intensive, but do not be decieved! The amount of resources required does not scale linearly with the number of reads (it grows much faster than that).
