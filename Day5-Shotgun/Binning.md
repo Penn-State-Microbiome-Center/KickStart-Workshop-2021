@@ -13,7 +13,7 @@ The following figure describes the current state of analysis for short read sequ
 
 
 ## Genome Binning
-We will look at the genome binner [MetaBinner](https://github.com/ziyewang/MetaBinner) in the [Genome Binning](GenomeBinning-MetaBinner.md) section.
+We will look at the genome binner [CONCOCT](https://concoct.readthedocs.io/en/latest/) in the [Genome Binning](GenomeBinning-CONCOCT.md) section.
 
 ## Taxonomic Binning
 We will look at the taxonomic binner [Kraken2](https://ccb.jhu.edu/software/kraken2/index.shtml) in the [Taxonomic Binning](TaxonomicBinning-Kraken2.md) section.
