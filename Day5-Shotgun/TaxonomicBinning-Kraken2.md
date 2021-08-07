@@ -98,9 +98,90 @@ do
   args=( $inOut );
   input=${dataDir}/${args[0]}
   output=${outputDir}/${args[1]}
-  kraken2 kraken2 --db ${trainingDir} --threads 10 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.txt --use-names --report ${output}/kraken_report.txt ${input}
+  kraken2 kraken2 --db ${trainingDir} --threads 10 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.fq --use-names --report ${output}/kraken_report.txt ${input}
 done
 ```
 Let's put this in a file named `run_kraken2.sh`, make it executable (`chmod +x run_kraken2.sh`) and then let it rip!
 
 ## Analyzing the output
+
+The `kraken_classified_sequences.fq` files contain fastq formatted files of the reads/contigs with an NCBI taxID in the header of each sequence. This can be helpful for determining the correspondence between contigs and what organisms they originated from.
+
+The `kraken_default_output.txt` contains a compressed-ish version of the above, but with additional information about what led to Kraken's inference. More details can be found [here](https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown#standard-kraken-output-format).
+
+Lastly, the `kraken_report.txt` is what led to some interpreting Kraken2 as usable as a taxonomic profiler (it sure looks like a profile!). The first number is the percent of sequences that covered this taxon, followed by the number assigned to that clade, then to that taxon, a rank code, and then an NCBI taxID. More info can be found [here](https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown#sample-report-output-format) about the format.
+Let's dig in a bit more:
+
+### Kraken2 on contigs
+Take a look at the `kraken_report.txt` in the `output/on_GATB` folder. See how this makes sense considering the BLAST results we saw earlier? In general, _this_ is what you want to be using instead of BLAST when you want to identify the taxa of each of your contigs. The same story emerges when we look at the report in the `output/on_MEGAHIT` directory.
+
+Now, let's contrast this to what happens when we look at the report in the raw reads directory: `output/on_raw_reads`. We get the following species:
+```
+Moraxella nonliquefaciens
+Moraxella catarrhalis
+Moraxella bovis
+Moraxella bovoculi
+Moraxella ovis
+Pseudomonas tolaasii
+Escherichia coli
+Klebsiella aerogenes
+Xanthomonas euvesicatoria
+Haemophilus parainfluenzae
+Methylophilus medardicus
+Dolosigranulum pigrum
+Streptococcus oralis
+Staphylococcus epidermidis
+Staphylococcus sp. SB1-57
+Staphylococcus warneri
+Paenibacillus kribbensis
+Finegoldia magna
+Fastidiosipila sanguinis
+Cutibacterium acnes
+Cutibacterium avidum
+Corynebacterium propinquum
+Corynebacterium segmentosum
+Corynebacterium macginleyi
+Corynebacterium sp. FDAARGOS 1242
+Corynebacterium sp. LMM-1652
+Corynebacterium kefirresidentii
+Corynebacterium stationis
+Corynebacterium glucuronolyticum
+Corynebacterium epidermidicanis
+Corynebacterium kutscheri
+Corynebacterium diphtheriae
+Corynebacterium xerosis
+Lawsonella clevelandensis
+Streptomyces tsukubensis
+Prevotella denticola
+Homo sapiens
+Propionibacterium virus Ouroboros
+Propionibacterium virus PHL041M10
+```
+This is what the Braken paper was refering to when it said not to trust the species classifications. Of course one could take a look higher ranks, like the Genus level:
+```
+Moraxella
+Pseudomonas
+Escherichia
+Klebsiella
+Xanthomonas
+Haemophilus
+Pseudoalteromonas
+Neisseria
+Methylophilus
+Sphingobium
+Dolosigranulum
+Streptococcus
+Staphylococcus
+Paenibacillus
+Finegoldia
+Fastidiosipila
+Cutibacterium
+Corynebacterium
+Lawsonella
+Streptomyces
+Bacteroides
+Prevotella
+Homo
+Pahexavirus
+```
+but here again we see lots of false positives. One is left to determine on their own what is an acceptable threshold of "% reads classified." Moral of the story? Use Kraken for taxonomic binning of contigs, use Braken (or MetaPhlAn3, or mOTUs2) for taxonomic profiling.
