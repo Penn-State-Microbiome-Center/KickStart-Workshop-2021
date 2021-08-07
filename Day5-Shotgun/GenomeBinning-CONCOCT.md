@@ -1,5 +1,16 @@
 # Genome binning with CONCOCT
 
+- [Installation and setup](#installation-and-setup)
+  - [File directory setup and data acquisition](#file-directory-setup-and-data-acquisition)
+  - [Installing CONCOCT](#installing-concoct)
+  - [Running CONCOCT](#running-concoct)
+    - [Preprocessing](#preprocessing)
+    - [Running the tool](#running-the-tool)
+    - [Post-processing](#post-processing)
+  - [Analyzing the bins](#analyzing-the-bins)
+  - [Putting it all together](#putting-it-all-together)
+
+
 CONCOCT is a genome binning tool first introduced in 2014. While it is not the most recent or accurate tool, it serves as the starting point for a number of other tools (such   as [MetaBinner](https://www.biorxiv.org/content/10.1101/2021.07.25.453671v1), [MetaWrap](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0541-1), and [UltraBinner](https://github.com/Huangpq2019/UltraBinner)). CONCOCT uses a combination of alignment covererage information and k-mer frequecies and a Gaussian mixture model to partition the contigs in a space of dimension reduction (i.e. PCA). The following figure (obtained from [here](https://www.nature.com/articles/nmeth.3103)) depicts the different genome bins with different colors along with the mixture model used to partition them (the legend corresponds to individual genomes):
 
 ![CONCOCT](https://user-images.githubusercontent.com/6362936/128550107-4e9ad699-1221-40d4-ad88-63e74f356352.PNG)
