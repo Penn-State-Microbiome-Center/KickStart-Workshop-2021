@@ -21,7 +21,7 @@ A PSU email and access to Penn State’s Roar system is required prior to the wo
 
 ## Schedule
 - Day 1 (OPTIONAL): [Unix Basics and Intro to Programming](/Day1-UnixBasics) - Emily Davenport  
-- Day 2: Basics of Microbiome Analysis - From Planning to Sequencing   -All Tutors
+- Day 2: [Basics of Microbiome Analysis - From Planning to Sequencing](/Day2-MicrobiomeAnalysisBasics) - All Tutors
 - Day 3: Amplicon Data Analysis in R - Sharifa Crandall and Erika Ganda
 - Day 4: Amplicon Data Analysis in QIIME2 - Erika Ganda and Laura Weyrich
 - Day 5: Shotgun data analysis (assembly, binning, and profiling) - David Koslicki
