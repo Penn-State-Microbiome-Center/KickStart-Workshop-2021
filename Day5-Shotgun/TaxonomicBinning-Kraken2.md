@@ -89,7 +89,19 @@ Let's go ahead and run Kraken on both assemblies, as well as the raw reads. We w
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-
+baseDir=/home/dmk333/KickStartWorkshop2021/Kraken2_analysis #<<-- replace with your full path
+dataDir=${baseDir}/data
+trainingDir=${dataDir}/k2train8gb
+outputDir=${baseDir}/output
+for inOut in "MEGAHIT_default_contigs.fasta on_MEGAHIT" "GATB_default_contigs.fasta on_GATB" "SRS014464-Anterior_nares.fastq on_raw_reads";
+do
+  args=( $inOut );
+  input=${dataDir}/${args[0]}
+  output=${outputDir}/${args[1]}
+  kraken2 kraken2 --db ${trainingDir} --threads 10 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.txt --use-names --report ${output}/kraken_report.txt ${input}
+done
+```
+Let's put this in a file named `run_kraken2.sh`, make it executable (`chmod +x run_kraken2.sh`) and then let it rip!
 
 conda deactivate
 conda create -y -n kraken2 kraken2
