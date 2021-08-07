@@ -212,4 +212,4 @@ cd ..  #<<-- if you aren't already in the base directory CONCOCT_analysis
 ./scripts/run_CONCOCT.sh -a data/GATB_default_contigs.fasta -r data/SRS014464-Anterior_nares.fastq -l 1000 -o output/on_GATB
 ```
 
-# Please now go to the [next section](TaxonomicBinning-Kraken2.md)
+# Please now go to the [taxonomic binning](TaxonomicBinning-Kraken2.md) section 
