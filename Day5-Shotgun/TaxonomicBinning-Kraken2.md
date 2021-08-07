@@ -103,15 +103,4 @@ done
 ```
 Let's put this in a file named `run_kraken2.sh`, make it executable (`chmod +x run_kraken2.sh`) and then let it rip!
 
-conda deactivate
-conda create -y -n kraken2 kraken2
-conda activate kraken2
-mkdir Kraken2_analysis
-cd Kraken2_analysis
-mkdir data data/k2train8gb scripts output
-cd data/k2train8gb
-wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_8gb_20210517.tar.gz # Via https://github.com/BenLangmead/aws-indexes/blob/master/docs/k2.md
-tar -xzvf k2_standard_8gb_20210517.tar.gz
-cd ../..
-kraken2 --db . --threads 10 --output kraken_out.txt --classified-out kraken_cl_out.txt --use-names anonymous_reads.fq
-```
+## Analyzing the output
