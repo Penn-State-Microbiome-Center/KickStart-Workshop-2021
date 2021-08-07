@@ -1,4 +1,11 @@
 # Taxonomic binning with Kraken2
+- [Taxonomic binning with Kraken2](#taxonomic-binning-with-kraken2)
+  - [Setup and installation](#setup-and-installation)
+    - [Folder structure](#folder-structure)
+    - [Installing Kraken2](#installing-kraken2)
+  - [Running Kraken2](#running-kraken2)
+  - [Analyzing the output](#analyzing-the-output)
+    - [Kraken2 on contigs](#kraken2-on-contigs)
 
 Kraken is a very widely utilized metagenomics tool (dating back to 2014) and Kraken2 is its most recent iteration that boasts higher accuracy and decreased system resource utilization over Kraken1. 
 
@@ -185,3 +192,5 @@ Homo
 Pahexavirus
 ```
 but here again we see lots of false positives. One is left to determine on their own what is an acceptable threshold of "% reads classified." Moral of the story? Use Kraken for taxonomic binning of contigs, use Braken (or MetaPhlAn3, or mOTUs2) for taxonomic profiling.
+
+# Congrats on finishing the "first steps to metagenomics analysis" section!
