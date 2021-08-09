@@ -100,27 +100,25 @@ or `-r` single-end, as well as the specification of the output directory with `-
 ### File directory setup and data acquisition 
 Let's make a top-level directory for our analysis:
 ```
+cd ~
 mkdir MEGAHIT_analysis
 cd MEGAHIT_analysis
 ```
 
-As usual, we will make `data`, `scripts`, and `output` directories:
+As usual, we will make `data`, `scripts`, and `output` directories and download the data we need:
 ```
 mkdir data scripts output
-```
-After this, we can use the same data that we used in the profiling section:
-```
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
 ls *.gz | xargs -P6 -I{} gunzip {}
+cd ..
 ```
 
 ### Running MEGAHIT
 
 To run MEGAHIT using the default parameters on one of the samples we have, all it takes is the following:
 ```
-cd ../scripts
-megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/default
+megahit -r data/SRS014464-Anterior_nares.fasta -o output/default
 ```
 
 Before we investigate the output of MEGAHIT, let's run it with a few different parameter settings.
@@ -137,7 +135,7 @@ In practice, this _can_ result in the assembly of high abundance organisms. Inve
 I.e. you may get a bunch of really short contigs.
 
 ```
-megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/ksize15-51-10 --k-min 15 --k-max 51 --k-step 10
+megahit -r data/SRS014464-Anterior_nares.fasta -o output/ksize15-51-10 --k-min 15 --k-max 51 --k-step 10
 ```
 
 ## Analyzing the assembly
@@ -160,18 +158,18 @@ to get some insight about the basic assembly quality.
 
 MEGAHIT returns a main `final.contigs.fa` in the output directory which contains the assembled contigs. As such, we can run quast on a single assembly in the following way:
 ```
-quast -o quast_out `#<<-- specify the output folder` \
+quast -o output/default/quast_out `#<<-- specify the output folder` \
  -m 250 `#<<-- consider 250bp+ as a contig` \
  --circos `#<<-- make a circos plot` \
  --glimmer `#<<-- use glimmer to predict genes (note: you should use -mgm (MetaGeneMark) instead, but we would need everyone to agree to a license and download it, so we aren't doing that here` \
  --rna-finding `#<<-- try to find ribosomal RNA genes` \
- --single ../../data/SRS014464-Anterior_nares.fasta `#<-- tell QUAST where the reads were so you can map it back to the assembly` \
-  final.contigs.fa `#<<-- the input assembly`
+ --single data/SRS014464-Anterior_nares.fasta `#<-- tell QUAST where the reads were so you can map it back to the assembly` \
+  output/default/final.contigs.fa `#<<-- the input assembly`
  
 ```
 Note: running this in a single line without the comments looks like:
 ```
-quast -o quast_out -m 250 --circos --glimmer --rna-finding --single ../../data/SRS014464-Anterior_nares.fasta final.contigs.fa
+quast -o output/default/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default/final.contigs.fa
 ```
 
 If you download the QUAST report, you can view it in a browser by clicking the `report.html` tag. It should look something like this:
@@ -180,16 +178,19 @@ If you download the QUAST report, you can view it in a browser by clicking the `
 
 Let's go ahead and run QUAST on each of the assemblies. We will create a file that will automatically create a QUAST report for each of the assemblies.
 ```
-cd ../scripts
-vim run_quast.sh
-# Copy the following into that file: "a, paste, <esc>:w!<enter>, <shift>zz"
-
+touch scripts/run_quast.sh
+chmod +x scripts/run_quast.sh
+nano scripts/run_quast.sh  #<<-- or vim or the like
+```
+Then paste the following into that file:
+```
 #!/bin/bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-baseFolder="/home/dmk333/KickStartWorkshop2021/MEGAHIT_analysis"  #<<---- replace with your base directory
-outputFolder="${baseFolder}/output"
+scriptFolder=`dirname $0`  #<<-- where this script is located
+baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
+outputFolder="${baseFolder}/output"  #<<-- output folder
 
 # Now analyze everything in one go
 inputFolder="${baseFolder}/output/"
@@ -199,10 +200,9 @@ do
 done
 
 ```
-Then make it executable and run it:
+Then run it:
 ```
-chmod +x run_quast.sh
-./run_quast.sh
+./scripts/run_quast.sh
 ```
 
 Now that we have run all the analyses, let's compare their results by downloading the associated output folders and viewing the html output.
