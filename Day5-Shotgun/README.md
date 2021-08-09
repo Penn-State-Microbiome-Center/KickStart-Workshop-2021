@@ -1,3 +1,12 @@
+# Whole genome shotgun metagenomics analysis
+- [Reminder if you forget how to access the ACI ROAR cluster](#reminder-if-you-forget-how-to-access-the-aci-roar-cluster)
+  - [Graphical user interface](#graphical-user-interface)
+  - [SSH](#ssh)
+- [Shotgun metagenomic analysis](#shotgun-metagenomic-analysis)
+  - [Taxonomic profiling](#taxonomic-profiling)
+  - [Assembly](#assembly)
+  - [Binning](#binning)
+
 # Reminder if you forget how to access the ACI ROAR cluster
 
 ## Graphical user interface
