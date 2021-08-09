@@ -14,7 +14,8 @@
 2. On the top, click the dropdown for "Interactive Apps"
 3. Click "RHEL7 Interactive Desktop"
 4. Change the allocation drop-down to "wff3_g_g_lc_icds-training"
-5. Click "Launch"
+5. Select the "ACI-b Basic Core" on the "Node type" drop down
+6. Click "Launch"
 
 ## SSH
 ```
