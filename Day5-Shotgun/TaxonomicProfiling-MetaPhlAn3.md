@@ -310,11 +310,12 @@ Then paste the following into this file:
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-baseFolder=$(pwd)
-outputFolder="${baseFolder}/output"
+scriptFolder=`dirname $0`  #<<-- where this script is located
+baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
+outputFolder="${baseFolder}/output"  #<<-- output folder
 
 # Now analyze everything in one go
-echo "Now running everything"
+echo "Now running everything"  #<<-- print a message
 inputFolder="${baseFolder}/data/"
 for file in `ls ${inputFolder}/*.fasta`;
 do
