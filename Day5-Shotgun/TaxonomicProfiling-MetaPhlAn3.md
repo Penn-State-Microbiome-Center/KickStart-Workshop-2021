@@ -196,7 +196,7 @@ This file contains the final computed organism abundances.
 Organism abundances are listed one clade per line, tab-separated from
 the clade's percent abundance:
 
-     more -S SRS014476-Supragingival_plaque_profile.txt
+     more -S output/SRS014476-Supragingival_plaque_profile.txt
 
 Output:
 
@@ -227,7 +227,7 @@ clade is prefixed to indicate its level:
 We will look for (grep) lines which contain the pattern `s__` that is associated with species and print the first match with the `-m1` argument. Remember that this file have 4 tab-separated columns and the taxonomy is listed in the first; so we will use `cut -f1` to get (cut out) the first column only (the field at position 1). Finally, the taxonomic levels are separated by the `|` character which we will replace with the new line character `\n`.
 
 
-      grep "s__" -m1 SRS014476-Supragingival_plaque_profile.txt | cut -f1 | sed 's/|/\n/g'
+      grep "s__" -m1 output/SRS014476-Supragingival_plaque_profile.txt | cut -f1 | sed 's/|/\n/g'
 
 Output (The taxonomy of the microbe *C. matruchotii*):
 
@@ -252,7 +252,7 @@ clades unclassified at this level).
 Let us check if all orders sum to 100% using `grep`. The orders 'Corynebacteriales' and 'Micrococcales' are in the class 'Actinobacteria'. 
 
 
-      grep o__ SRS014476-Supragingival_plaque_profile.txt | grep -v f__
+      grep o__ output/SRS014476-Supragingival_plaque_profile.txt | grep -v f__
 
 Output:
 
@@ -261,7 +261,7 @@ Output:
     
 Similarly, the families must sum to 100%. In this example, let us also display the fields of interest i.e. taxonomy names and percentages for ease of viewing.
   
-     grep f__ SRS014476-Supragingival_plaque_profile.txt | grep -v g__ | cut -f1,3
+     grep f__ output/SRS014476-Supragingival_plaque_profile.txt | grep -v g__ | cut -f1,3
 
 Output:
 
@@ -440,17 +440,16 @@ convenience script that can show any, some, or all of the microbes or
 samples in a MetaPhlAn table. In this tutorial we will plot the heatmap
 for all of the samples.
 
-You can install hclust2 and other bioBakery tools automatically with
-[Conda](https://docs.conda.io/en/latest/). :
+If you are on OpenDemand, hclust2 is already installed in the `bioconda` environment:
+```
+conda deactivate
+conda activate bioconda
+```
+
+Otherwise, if you are on a personal machine or somewhere else, you can install hclust2 via conda:
 
      conda install -c biobakery hclust2
 
-This will install hclust2 and all of its dependencies.
-
-Alternatively, you can manually install hclust2 from source by
-[downloading hclust2](https://bitbucket.org/nsegata/hclust2/get/tip.zip)
-and then installing the hclust2 dependencies (numpy, pandas, biopython,
-scipy, and matplotlib).
 
 ------------------------------------------------------------------------
 
@@ -462,8 +461,8 @@ providing the abundance table (
 ) created in prior tutorial steps: :
 
 ```
-  grep -E "s__|clade" merged_abundance_table.txt | sed 's/^.*s__//g'\
-| cut -f1,3-8 | sed -e 's/clade_name/body_site/g' > merged_abundance_table_species.txt
+  grep -E "s__|clade" output/merged_abundance_table.txt | sed 's/^.*s__//g'\
+| cut -f1,3-8 | sed -e 's/clade_name/body_site/g' > output/merged_abundance_table_species.txt
 ```
 
 There are four parts to this command. The first grep searches the file
@@ -502,7 +501,7 @@ The first few lines of the file will look like:
 Next generate the species only heatmap by running the following command:
 
 ```
- hclust2.py -i merged_abundance_table_species.txt -o abundance_heatmap_species.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
+ hclust2.py -i output/merged_abundance_table_species.txt -o output/abundance_heatmap_species.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
 ```
 
 We have only 16 microbes in this demo file but typically, for ease of viewing, one can show the top 25 species using the `--ftop 25` argument. This script uses
@@ -551,7 +550,14 @@ Galaxy](https://github.com/biobakery/biobakery/wiki/graphlan#rst-header-graphlan
 For more information on this tool, refer to the [GraPhlAn
 tutorial](https://github.com/biobakery/biobakery/wiki/graphlan).
 
-You can install GraPhlAn and other bioBakery tools automatically with
+
+If you are on OpenDemand, you can activate GraPhlAn with the following
+```
+conda deactivate
+conda activate graphlan
+```
+
+Otherwise, if you are on a personal machine or the like, you can install GraPhlAn with
 [Conda](https://docs.conda.io/en/latest/):
 
 ```bash
@@ -561,11 +567,6 @@ conda activate graphlan
 ```
 
 This will install GraPhlAn, export2graphlan, and all of its dependencies.
-
-Alternatively, you can manually install them from source by
-[downloading
-GraPhlAn](https://github.com/biobakery/graphlan/archive/1.1.3.zip) and [downloading export2graphlan](https://github.com/SegataLab/export2graphlan/archive/0.22.zip)
-and then install the GraPhlAn dependencies (numpy, pandas, biopython, scipy, and matplotlib).
 
 ------------------------------------------------------------------------
 **Step 1:** Create the GraPhlAn input files
@@ -577,8 +578,8 @@ Run the following command to generate the two input files for GraPhlAn
 (the tree and annotation files) providing the abundance table
 ([merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)) created in the prior tutorial steps reformatted to remove the version header and the NCBI taxon id in the second column.
 
-     tail -n +2 merged_abundance_table.txt | cut -f1,3- > merged_abundance_table_reformatted.txt
-     export2graphlan.py --skip_rows 1 -i merged_abundance_table_reformatted.txt --tree merged_abundance.tree.txt --annotation merged_abundance.annot.txt --most_abundant 100 --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 --external_annotations 7 --min_clade_size 1
+     tail -n +2 output/merged_abundance_table.txt | cut -f1,3- > output/merged_abundance_table_reformatted.txt
+     export2graphlan.py --skip_rows 1 -i output/merged_abundance_table_reformatted.txt --tree output/merged_abundance.tree.txt --annotation output/merged_abundance.annot.txt --most_abundant 100 --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 --external_annotations 7 --min_clade_size 1
 
 
 The command above has options to skip rows 1 and 2 (headers), select the top 100
@@ -605,8 +606,8 @@ Run the following commands to generate the cladogram providing the tree
 ) files from the prior step :
 
 ```
-     graphlan_annotate.py --annot merged_abundance.annot.txt merged_abundance.tree.txt merged_abundance.xml
-     graphlan.py --dpi 300 merged_abundance.xml merged_abundance.png --external_legends
+     graphlan_annotate.py --annot output/merged_abundance.annot.txt output/merged_abundance.tree.txt output/merged_abundance.xml
+     graphlan.py --dpi 300 output/merged_abundance.xml output/merged_abundance.png --external_legends
 ```
 
 The first command creates an xml file from the tree and annotation
