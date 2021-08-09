@@ -47,6 +47,7 @@ conda activate metaphlan
 ## Set up directories and obtain the test data:
 - Make analysis folders:
 ```
+cd ~
 mkdir MetaPhlAn_analysis  #<<-- main analysis folder
 cd MetaPhlAn_analysis  #<<-- go inside this folder
 mkdir data output scripts  #<<-- make three directories: data, output, and scripts
