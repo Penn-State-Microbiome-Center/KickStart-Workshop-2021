@@ -38,7 +38,7 @@ conda activate motus2
 
 Run the following commands to create the folder structure and download the necessary data:
 ```
-cd
+cd ~
 mkdir mOTUs_Analysis
 cd mOTUs_Analysis
 mkdir data scripts output
@@ -134,7 +134,8 @@ Then paste the following into that file:
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
+scriptFolder=`dirname $0`  #<<-- where this script is located
+baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
 outputFolder="${baseFolder}/output"
 
 # Now analyze everything in one go
@@ -152,14 +153,14 @@ You can run it with `./run_motus.sh`.
 Now that we have run both mOTUs2 and MetaPhlAn3 on the same data, we can compare the differences between these tools. Using TAMPA (which we installed previously) we can do this.
 ```
 conda deactivate
-conda activate tampa
+conda activate bioconda  #<<-- or wherever you installed TAMPA
 ```
 Let's pretend the mOTUs2 profile is the "ground truth" and compare its results on one sample to that of MetaPhlAn3:
 ```bash
-cd ../output
-sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
+cd output
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
 sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
-python ../../TAMPA/src/profile_to_plot.py -i ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
+python ../../TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
 ```
 You should then see a file like the following:
 ![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
@@ -187,9 +188,9 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
 
 ```bash
  samtools view -h SRS014464-Anterior_nares.motus_bam > SRS014464-Anterior_nares.motus_sam
- cd /data/dmk333/Software/conda/miniconda3/envs/motus2/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
- grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/KickStartWorkshop2021/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
- cd ~/KickStartWorkshop2021/mOTUs_Analysis/output/
+ /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
+ grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
+ cd ~/mOTUs_Analysis/output/
  grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  ```
  
