@@ -3,8 +3,7 @@
 ===========================
 - [mOTUs2 Tutorial](#motus2-tutorial)
 - [Installation and setup](#installation-and-setup)
-  - [Obtaining test data:](#obtaining-test-data)
-  - [Create folder directory](#create-folder-directory)
+  - [File structure and data:](#file-structure-and-data)
 - [Create taxonomic profiles](#create-taxonomic-profiles)
   - [Input files](#input-files)
   - [Run multiple samples](#run-multiple-samples)
@@ -35,21 +34,19 @@ conda create -y --name motus2 -c bioconda motus
 conda activate motus2
 ```
 
-## Obtaining test data:
-- Make analysis folder: `mkdir mOTUs_Analysis`
-- `cd mOTUs_Analysis`
-- `mkdir data`
-- `cd data`
-- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt`
-- Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
-- `cd ..`
+## File structure and data:
 
-## Create folder directory
-- `mkdir output`
-- `mkdir scripts`
-- `cd scripts`
-- `vim run_motus.sh`
-
+Run the following commands to create the folder structure and download the necessary data:
+```
+cd
+mkdir mOTUs_Analysis
+cd mOTUs_Analysis
+mkdir data scripts output
+cd data
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt
+ls *.gz | xargs -P6 -I{} gunzip {}
+cd ..
+```
 
 # Create taxonomic profiles
 
