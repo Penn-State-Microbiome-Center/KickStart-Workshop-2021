@@ -289,7 +289,7 @@ Output:
 
 If available, it is recommended to use the bowtie2out file as an input to MetaPhlAn as it significantly speeds up metagenomic profiling. Let us delete the **File 2** we created in the previous step and use the bowtie2out file (**File1**) to regenerate it. Notice that we will have to change the `--input_type` argument.
 
-     rm -f SRS014476-Supragingival_plaque_profile.txt
+     rm -f output/SRS014476-Supragingival_plaque_profile.txt
      metaphlan output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt --input_type bowtie2out > output/SRS014476-Supragingival_plaque_profile.txt
 
 On real data, you will notice that this executes much more quickly than on the raw FASTA file. This is especially helpful if all you want to do is change the format of the output or similar.
@@ -320,8 +320,8 @@ inputFolder="${baseFolder}/data/"
 for file in `ls ${inputFolder}/*.fasta`;
 do
         baseName=$(basename $file)
-        metaphlan $file --input_type fasta --nproc 10 --CAMI_format_output --force > ${outputFolder}/${baseName%.fasta}.cami_profile
-        metaphlan ${file}.bowtie2out.txt --input_type bowtie2out --nproc 5 > ${outputFolder}/${baseName%.fasta}.default_profile
+        metaphlan $file --input_type fasta --nproc 4 --CAMI_format_output --force -o ${outputFolder}/${baseName%.fasta}.cami_profile --bowtie2out output/${baseName}.bowtie2out.txt
+        metaphlan output/${baseName}.bowtie2out.txt --input_type bowtie2out --nproc 4 -o ${outputFolder}/${baseName%.fasta}.default_profile
 done
 ```
 
