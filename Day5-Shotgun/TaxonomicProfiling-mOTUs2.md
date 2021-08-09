@@ -17,7 +17,7 @@ shotgun sequencing data.
 This tool has a good balance of sensitivity and specificity. It is based on marker genes, but in contrast to MetaPhlAn, it uses single nucleotide variants in the marker genes
 which leads to higher sensitivity. 
 
-<img src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" data-canonical-src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" width="250" />
+<img src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" data-canonical-src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" width="700" />
 
 (via [the mOTUS website](https://motu-tool.org/))
 
