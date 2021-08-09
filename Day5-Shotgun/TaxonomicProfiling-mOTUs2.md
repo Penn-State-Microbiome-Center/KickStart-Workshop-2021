@@ -22,9 +22,18 @@ which leads to higher sensitivity.
 (via [the mOTUS website](https://motu-tool.org/))
 
 # Installation and setup
-- Activate conda on Roar: `module load anaconda3`
-- Create the environment: `conda create -y --name motus2 -c bioconda motus`
-- Start the environment: `conda activate motus2`
+If you are on OpenDemand, activate the pre-installed software with:
+```
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+conda activate bioconda
+```
+
+Otherwise, if you are on a different system, do a fresh install via:
+```
+conda create -y --name motus2 -c bioconda motus
+conda activate motus2
+```
 
 ## Obtaining test data:
 - Make analysis folder: `mkdir mOTUs_Analysis`
