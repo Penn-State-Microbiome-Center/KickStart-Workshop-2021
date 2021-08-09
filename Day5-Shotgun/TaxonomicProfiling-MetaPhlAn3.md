@@ -152,7 +152,8 @@ Please proceed to [**Run a single sample**](#run-a-single-sample) section below.
 
 Here is the basic example to profile a single metagenome from raw reads:
 
-     metaphlan SRS014476-Supragingival_plaque.fasta.gz --input_type fasta > SRS014476-Supragingival_plaque_profile.txt
+     cd data
+     metaphlan SRS014476-Supragingival_plaque.fasta --input_type fasta > ../output/SRS014476-Supragingival_plaque_profile.txt
 
 ### **Output files**
 
@@ -168,7 +169,7 @@ markers.
 Alignments are listed one per line in tab-separated columns of read and
 reference marker.
 
-     more -S SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt
+     more -S SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
 
 Output:
 
@@ -199,7 +200,7 @@ the clade's percent abundance:
 Output:
 
     #mpa_v30_CHOCOPhlAn_201901
-    #/n/huttenhower_lab/tools/metaphlan3/bin/metaphlan SRS014476-Supragingival_plaque.fasta.gz --input_type fasta
+    #/n/huttenhower_lab/tools/metaphlan3/bin/metaphlan SRS014476-Supragingival_plaque.fasta --input_type fasta
     #SampleID       Metaphlan_analysis
     #clade_name     NCBI_tax_id     relative_abundance      additional_species
     k__Bacteria     2       100.0   
@@ -288,7 +289,7 @@ Output:
 If available, it is recommended to use the bowtie2out file as an input to MetaPhlAn as it significantly speeds up metagenomic profiling. Let us delete the **File 2** we created in the previous step and use the bowtie2out file (**File1**) to regenerate it. Notice that we will have to change the `--input_type` argument.
 
      rm -f SRS014476-Supragingival_plaque_profile.txt
-     metaphlan SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt --input_type bowtie2out > SRS014476-Supragingival_plaque_profile.txt
+     metaphlan SRS014476-Supragingival_plaque.fasta.bowtie2out.txt --input_type bowtie2out > SRS014476-Supragingival_plaque_profile.txt
      ls -ltr
 
 ### **Run on multiple cores**
@@ -296,7 +297,7 @@ If available, it is recommended to use the bowtie2out file as an input to MetaPh
 When available, MetaPhlAn can take advantage of multiple cores using
 the `nproc` flag: 
 
-     metaphlan SRS014459-Stool.fasta.gz --input_type fasta --nproc 4 > SRS014459-Stool_profile.txt
+     metaphlan SRS014459-Stool.fasta --input_type fasta --nproc 4 > SRS014459-Stool_profile.txt
 
 **Note:** `nproc` is used by bowtie2 which processes 10K reads per second per thread. Since we have a very small number of reads in this demo, the difference in speed up is negligible.
 
@@ -309,16 +310,16 @@ abundance table spanning multiple samples. Let's finish the last four
 samples from the input files tutorial section: 
 
 ```
-     metaphlan SRS014464-Anterior_nares.fasta.gz --input_type fasta --nproc 4 > SRS014464-Anterior_nares_profile.txt
-     metaphlan SRS014470-Tongue_dorsum.fasta.gz --input_type fasta --nproc 4 > SRS014470-Tongue_dorsum_profile.txt
-     metaphlan SRS014472-Buccal_mucosa.fasta.gz --input_type fasta --nproc 4 > SRS014472-Buccal_mucosa_profile.txt
-     metaphlan SRS014494-Posterior_fornix.fasta.gz --input_type fasta --nproc 4 > SRS014494-Posterior_fornix_profile.txt
+     metaphlan SRS014464-Anterior_nares.fasta --input_type fasta --nproc 4 > SRS014464-Anterior_nares_profile.txt
+     metaphlan SRS014470-Tongue_dorsum.fasta --input_type fasta --nproc 4 > SRS014470-Tongue_dorsum_profile.txt
+     metaphlan SRS014472-Buccal_mucosa.fasta --input_type fasta --nproc 4 > SRS014472-Buccal_mucosa_profile.txt
+     metaphlan SRS014494-Posterior_fornix.fasta --input_type fasta --nproc 4 > SRS014494-Posterior_fornix_profile.txt
 ```
 
 - Alternatively, if you are familiar with shell syntax, you can loop over all input files (make sure you have deleted previously generated output files to prevent errors):
 
 ```
-     for i in SRS*.fasta.gz; do metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta.gz}_profile.txt; done
+     for i in SRS*.fasta; do metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta}_profile.txt; done
 ```
 
 Either way, you will now have a complete set of six profile output files
