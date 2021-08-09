@@ -1,4 +1,13 @@
 # Reminder if you forget how to access the ACI ROAR cluster
+
+## Graphical user interface
+1. Nagivate to [portal.aci.ics.psu.edu](portal.aci.ics.psu.edu)
+2. On the top, click the dropdown for "Interactive Apps"
+3. Click "RHEL7 Interactive Desktop"
+4. Change the allocation drop-down to "wff3_g_g_lc_icds-training"
+5. Click "Launch"
+
+## SSH
 ```
 ssh <PSU ID>@submit.aci.ics.psu.edu
 qsub -A wff3_g_g_lc_icds-training -l walltime=4:00:00 -l nodes=1:ppn=4 -I
