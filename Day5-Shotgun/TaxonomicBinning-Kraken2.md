@@ -193,4 +193,4 @@ Pahexavirus
 ```
 but here again we see lots of false positives. One is left to determine on their own what is an acceptable threshold of "% reads classified." Moral of the story? Use Kraken for taxonomic binning of contigs, use Braken (or MetaPhlAn3, or mOTUs2) for taxonomic profiling.
 
-# Congrats on finishing the "first steps to metagenomics analysis" section!
+# Congrats on finishing the "intro to WGS metagenomics" tutorial!
