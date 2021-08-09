@@ -32,7 +32,7 @@ This tool is quite fast and has high specificity, but sacrifices sensitivity. It
 If you are taking part in the workshop, use the following commands to activate the environment.
 ```
 module use /gpfs/group/RISE/sw7/modules
-module load anaconda3
+module load anaconda
 conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/metaphlan
 ```
 
@@ -152,8 +152,9 @@ Please proceed to [**Run a single sample**](#run-a-single-sample) section below.
 
 Here is the basic example to profile a single metagenome from raw reads:
 
-     cd data
-     metaphlan SRS014476-Supragingival_plaque.fasta --input_type fasta > ../output/SRS014476-Supragingival_plaque_profile.txt
+```
+metaphlan data/SRS014476-Supragingival_plaque.fasta --input_type fasta --nproc 5 --force -o output/SRS014476-Supragingival_plaque_profile.txt --bowtie2out output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
+```
 
 ### **Output files**
 
@@ -161,16 +162,16 @@ Running MetaPhlAn, following the example in the prior section, will
 create two output files. Check what files have been created with `more`.
 
 **File 1:**
-[SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
+[SRS014476-Supragingival\_plaque.fasta.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
 
 This file contains the intermediate mapping results to unique sequence
 markers.
 
 Alignments are listed one per line in tab-separated columns of read and
 reference marker.
-
-     more -S SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
-
+```
+more -S output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
+```
 Output:
 
     HWUSI-EAS1568_102539179:1:100:10001:7882/1      712117__F3PCC2__HMPREF9056_02717
@@ -289,40 +290,47 @@ Output:
 If available, it is recommended to use the bowtie2out file as an input to MetaPhlAn as it significantly speeds up metagenomic profiling. Let us delete the **File 2** we created in the previous step and use the bowtie2out file (**File1**) to regenerate it. Notice that we will have to change the `--input_type` argument.
 
      rm -f SRS014476-Supragingival_plaque_profile.txt
-     metaphlan SRS014476-Supragingival_plaque.fasta.bowtie2out.txt --input_type bowtie2out > SRS014476-Supragingival_plaque_profile.txt
-     ls -ltr
+     metaphlan output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt --input_type bowtie2out > output/SRS014476-Supragingival_plaque_profile.txt
 
-### **Run on multiple cores**
-
-When available, MetaPhlAn can take advantage of multiple cores using
-the `nproc` flag: 
-
-     metaphlan SRS014459-Stool.fasta --input_type fasta --nproc 4 > SRS014459-Stool_profile.txt
-
-**Note:** `nproc` is used by bowtie2 which processes 10K reads per second per thread. Since we have a very small number of reads in this demo, the difference in speed up is negligible.
-
+On real data, you will notice that this executes much more quickly than on the raw FASTA file. This is especially helpful if all you want to do is change the format of the output or similar.
 
 ### **Run multiple samples**
 
 - Each MetaPhlAn execution processes exactly one sample, but the
 resulting single-sample analyses can easily be combined into an
-abundance table spanning multiple samples. Let's finish the last four
-samples from the input files tutorial section: 
-
+abundance table spanning multiple samples. Let's put everything into a single script that we can run.
+First, we will make a file that will contain the commands we want:
 ```
-     metaphlan SRS014464-Anterior_nares.fasta --input_type fasta --nproc 4 > SRS014464-Anterior_nares_profile.txt
-     metaphlan SRS014470-Tongue_dorsum.fasta --input_type fasta --nproc 4 > SRS014470-Tongue_dorsum_profile.txt
-     metaphlan SRS014472-Buccal_mucosa.fasta --input_type fasta --nproc 4 > SRS014472-Buccal_mucosa_profile.txt
-     metaphlan SRS014494-Posterior_fornix.fasta --input_type fasta --nproc 4 > SRS014494-Posterior_fornix_profile.txt
+touch scripts/run_metaphlan.sh
+chmod +x scripts/run_metaphlan.sh
+vim scripts/run_metaphlan.sh  #<<-- or your favorite text editor.
+```
+Then paste the following into this file:
+```
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
+
+baseFolder=$(pwd)
+outputFolder="${baseFolder}/output"
+
+# Now analyze everything in one go
+echo "Now running everything"
+inputFolder="${baseFolder}/data/"
+for file in `ls ${inputFolder}/*.fasta`;
+do
+        baseName=$(basename $file)
+        metaphlan $file --input_type fasta --nproc 10 --CAMI_format_output --force > ${outputFolder}/${baseName%.fasta}.cami_profile
+        metaphlan ${file}.bowtie2out.txt --input_type bowtie2out --nproc 5 > ${outputFolder}/${baseName%.fasta}.default_profile
+done
 ```
 
-- Alternatively, if you are familiar with shell syntax, you can loop over all input files (make sure you have deleted previously generated output files to prevent errors):
-
+At this point, you can then execute the script using the following command:
 ```
-     for i in SRS*.fasta; do metaphlan $i --input_type fasta --nproc 4 > ${i%.fasta}_profile.txt; done
+./scripts/run_metaphlan.sh
 ```
 
-Either way, you will now have a complete set of six profile output files
+You will now have a complete set of six profile output files
 and six intermediate mapping files. If you'd like to skip this step to
 speed things up, the 12 demo file outputs can be downloaded from the
 following links (right-click on the link and pick 'Save Link as ..' or click on the link and then right-click on the preview page and select "Save Page as...", or copy the URL to download on a server).
@@ -350,7 +358,7 @@ following links (right-click on the link and pick 'Save Link as ..' or click on 
 Finally, the MetaPhlAn distribution includes a utility script that will
 create a single tab-delimited table from these files: 
 
-     merge_metaphlan_tables.py *_profile.txt > merged_abundance_table.txt
+     merge_metaphlan_tables.py output/*_profile.txt > output/merged_abundance_table.txt
 
 -   [merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
 
@@ -358,7 +366,7 @@ The resulting table can be opened in Excel, any gene expression analysis
 program, `less` (example below), or visualized graphically as per
 subsequent tutorial sections:
 
-     less -S merged_abundance_table.txt
+     more output/merged_abundance_table.txt
 
 The first few lines look like:
 
@@ -396,7 +404,15 @@ The first few lines look like:
 
 ### **Simple Vizualization with TAMPA**
 For a quick visualization of the profile, I've developed a tool called TAMPA (TAxonoMic Profiling Anlaysis) to help view the profile output when it is in the CAMI 
-(Critical Assessment of Metagenome Interpretation) format. To install this tool, run the following:
+(Critical Assessment of Metagenome Interpretation) format. 
+
+If you are on OpenDemand, TAMPA comes pre-installed, and you can activate it with
+```
+conda deactivate
+conda activate bioconda
+```
+
+To install this tool from scratch, run the following:
 ```bash
 git clone https://github.com/dkoslicki/TAMPA.git
 conda config --add channels defaults
@@ -406,9 +422,10 @@ conda deactivate
 conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
 conda activate tampa
 ```
-You can then view the output by running the following:
+
+You can then create the visualization with the following command:
 ```bash
- python TAMPA/src/profile_to_plot.py -i MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile  -g MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile -b Anterior_nares -nm genus
+ python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
 ```
 This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
 ![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
