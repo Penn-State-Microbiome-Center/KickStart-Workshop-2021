@@ -301,8 +301,8 @@ resulting single-sample analyses can easily be combined into an
 abundance table spanning multiple samples. Let's put everything into a single script that we can run.
 First, we will make a file that will contain the commands we want:
 ```
-touch scripts/run_metaphlan.sh
-chmod +x scripts/run_metaphlan.sh
+touch scripts/run_metaphlan.sh  #<<-- create an empty file
+chmod +x scripts/run_metaphlan.sh  #<<-- make it executable
 vim scripts/run_metaphlan.sh  #<<-- or your favorite text editor.
 ```
 Then paste the following into this file:
