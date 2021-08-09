@@ -170,7 +170,7 @@ markers.
 Alignments are listed one per line in tab-separated columns of read and
 reference marker.
 ```
-more -S output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
+more output/SRS014476-Supragingival_plaque.fasta.bowtie2out.txt
 ```
 Output:
 
@@ -196,7 +196,7 @@ This file contains the final computed organism abundances.
 Organism abundances are listed one clade per line, tab-separated from
 the clade's percent abundance:
 
-     more -S output/SRS014476-Supragingival_plaque_profile.txt
+     more output/SRS014476-Supragingival_plaque_profile.txt
 
 Output:
 
