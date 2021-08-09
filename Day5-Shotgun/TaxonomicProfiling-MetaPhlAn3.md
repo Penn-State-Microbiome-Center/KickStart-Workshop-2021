@@ -69,7 +69,7 @@ The basic steps of MetaPhlAn are:
 [![MetaPhlAn2.png](https://github.com/biobakery/biobakery/blob/master/images/2526749054-MetaPhlAn2.png)](https://github.com/biobakery/biobakery/blob/master/images/2526749054-MetaPhlAn2.png)
 
 ------------------------------------------------------------------------
-**Create taxonomic profiles**
+## **Create taxonomic profiles**
 -----------------------------
 
 MetaPhlAn accepts as input short reads from a single shotgun
