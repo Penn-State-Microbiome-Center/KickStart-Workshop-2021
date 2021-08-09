@@ -17,6 +17,12 @@
 5. Select the "ACI-b Standard Core" on the "Node type" drop down
 6. Click "Launch"
 
+After that, open a terminal (little black icon on the top bar, next to the firefox icon), and then enter the following commands:
+```
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+```
+
 ## SSH
 ```
 ssh <PSU ID>@submit.aci.ics.psu.edu
