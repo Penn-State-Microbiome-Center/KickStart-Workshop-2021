@@ -2,19 +2,22 @@
 **MetaPhlAn 3.0 Tutorial**
 ===========================
 Borrowing heavily from [here](https://github.com/biobakery/biobakery/wiki/metaphlan3).
-- [**Overview**](#overview)
-- [**Create taxonomic profiles**](#create-taxonomic-profiles)
-  * [**Input files**](#input-files)
-  * [**Run a single sample**](#run-a-single-sample)
-  * [**Output files**](#output-files)
-  * [**bowtie2out file as input**](#bowtie2out-file-as-input)
-  * [**Run on multiple cores**](#run-on-multiple-cores)
-  * [**Run multiple samples**](#run-multiple-samples)
-  * [**Merge outputs**](#merge-outputs)
-- [**Visualize results**](#visualize-results)
-  * [**Simple Vizualization with TAMPA**](#simple-vizualization-with-tampa)
-  * [**Create a heatmap with hclust2**](#create-a-heatmap-with-hclust2)
-  * [**Create a cladogram with GraPhlAn**](#create-a-cladogram-with-graphlan)
+- [Installation](#installation)
+  - [Activation on OpenDemand](#activation-on-opendemand)
+  - [Full installation](#full-installation)
+- [Set up directories and obtain the test data:](#set-up-directories-and-obtain-the-test-data)
+  - [**Overview**](#overview)
+    - [**Input files**](#input-files)
+    - [**Run a single sample**](#run-a-single-sample)
+    - [**Output files**](#output-files)
+    - [**bowtie2out file as input**](#bowtie2out-file-as-input)
+    - [**Run on multiple cores**](#run-on-multiple-cores)
+    - [**Run multiple samples**](#run-multiple-samples)
+    - [**Merge outputs**](#merge-outputs)
+  - [**Visualize results**](#visualize-results)
+    - [**Simple Vizualization with TAMPA**](#simple-vizualization-with-tampa)
+    - [**Create a heatmap with hclust2**](#create-a-heatmap-with-hclust2)
+    - [**Create a cladogram with GraPhlAn**](#create-a-cladogram-with-graphlan)
 
 [MetaPhlAn](https://github.com/biobakery/MetaPhlAn/tree/3.0) is a tool
 for profiling the taxonomic composition of microbial communities from metagenomic
