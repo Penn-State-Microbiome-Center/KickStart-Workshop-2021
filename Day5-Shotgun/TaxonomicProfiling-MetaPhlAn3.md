@@ -23,9 +23,19 @@ shotgun sequencing data.
 This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
 
 # Installation
+
+## Activation on OpenDemand
+If you are taking part in the workshop, use the following commands to activate the environment.
+```
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda3
+conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/metaphlan
+```
+
+## Full installation
+This instructions are _only_ if you would like to install it with conda elsewhere (eg. on the open queue, a personal computer, etc.)
 The basic steps are: load conda, create the environment, then install the tool:
 ```bash
-module use /gpfs/group/RISE/sw7/modules
 module load anaconda3
 conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan
 conda activate metaphlan
