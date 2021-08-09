@@ -11,6 +11,10 @@
 MEGAHIT is a _de novo_ assembler first introduced in 2015 which has been continually updated since then. It utilizes mutliple k-mer sizes when building a de Bruijn graph 
 along with a strategy to rescue low-coverage regions while attempting to account for sequencing error.
 
+From [the MEGAHIT publication](https://academic.oup.com/bioinformatics/article/31/10/1674/177884):
+![btv033f1p](https://user-images.githubusercontent.com/6362936/128756606-090fa301-30df-49b9-83a0-ed72482925d7.gif)
+
+
 ## Installation
 
 MEGAHIT can be installed with conda in the following fashion
