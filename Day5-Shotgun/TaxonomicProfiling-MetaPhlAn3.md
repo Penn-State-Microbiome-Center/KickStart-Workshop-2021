@@ -44,7 +44,7 @@ conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan
 conda activate metaphlan
 ```
 
-# Set up directories and obtain the test data:
+## Set up directories and obtain the test data:
 - Make analysis folders:
 ```
 mkdir MetaPhlAn_analysis  #<<-- main analysis folder
@@ -61,7 +61,7 @@ cd ..  #<<-- move back up a directory
 ```
 
 ------------------------------------------------------------------------
-## **Overview**
+# **Overview**
 ----------------
 
 The basic steps of MetaPhlAn are:
