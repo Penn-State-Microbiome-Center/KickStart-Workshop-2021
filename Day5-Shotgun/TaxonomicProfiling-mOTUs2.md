@@ -123,24 +123,29 @@ Since we now have practice running multiple samples, let's jump straight to:
 ## Run multiple samples
 
 Let's run, in parallel, all the samples through mOTUs2. Put the following code in a file called `run_motus.sh`:
+```
+touch scripts/run_motus.sh
+chmod +x scripts/run_motus.sh
+nano scripts/run_motus.sh
+```
+Then paste the following into that file:
+```
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
 
+baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
+outputFolder="${baseFolder}/output"
 
-	#!/bin/bash
-	set -e  # exit if there is an error
-	set -u  # exit if a variable is undefined
-
-	baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
-	outputFolder="${baseFolder}/output"
-
-	# Now analyze everything in one go
-	inputFolder="${baseFolder}/data/"
-	for file in `ls ${inputFolder}/*.fastq`;
-	do
-		baseName=$(basename $file)
-		motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
-	done
-
-And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
+# Now analyze everything in one go
+inputFolder="${baseFolder}/data/"
+for file in `ls ${inputFolder}/*.fastq`;
+do
+	baseName=$(basename $file)
+	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
+done
+```
+You can run it with `./run_motus.sh`.
 
 # Comparing differences between tools
 
