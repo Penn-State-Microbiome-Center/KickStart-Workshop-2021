@@ -12,7 +12,6 @@ Borrowing heavily from [here](https://github.com/biobakery/biobakery/wiki/metaph
     - [**Run a single sample**](#run-a-single-sample)
     - [**Output files**](#output-files)
     - [**bowtie2out file as input**](#bowtie2out-file-as-input)
-    - [**Run on multiple cores**](#run-on-multiple-cores)
     - [**Run multiple samples**](#run-multiple-samples)
     - [**Merge outputs**](#merge-outputs)
   - [**Visualize results**](#visualize-results)
