@@ -23,9 +23,13 @@ shotgun sequencing data.
 This tool is quite fast and has high specificity, but sacrifices sensitivity. It is based on clade specific marker genes.
 
 # Installation
-- Activate conda on Roar: `module load anaconda3`
-- Create the environment: `conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan`
-- Start the environment: `conda activate metaphlan`
+The basic steps are: load conda, create the environment, then install the tool:
+```bash
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda3
+conda create -y --name metaphlan -c bioconda python=3.7 tbb=2020.2 metaphlan
+conda activate metaphlan
+```
 
 # Set up directories and obtain the test data:
 - Make analysis folders:
