@@ -15,7 +15,10 @@
 shotgun sequencing data.
 
 This tool has a good balance of sensitivity and specificity. It is based on marker genes, but in contrast to MetaPhlAn, it uses single nucleotide variants in the marker genes
-which leads to higher sensitivity.
+which leads to higher sensitivity. 
+
+![motus_website_test1](https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png)
+(via [the mOTUS website](https://motu-tool.org/))
 
 # Installation and setup
 - Activate conda on Roar: `module load anaconda3`
