@@ -606,8 +606,8 @@ Run the following commands to generate the cladogram providing the tree
 ) files from the prior step :
 
 ```
-     graphlan_annotate.py --annot output/merged_abundance.annot.txt output/merged_abundance.tree.txt output/merged_abundance.xml
-     graphlan.py --dpi 300 output/merged_abundance.xml output/merged_abundance.png --external_legends
+graphlan_annotate.py --annot output/merged_abundance.annot.txt output/merged_abundance.tree.txt output/merged_abundance.xml
+graphlan.py --dpi 300 output/merged_abundance.xml output/merged_abundance.png --external_legends
 ```
 
 The first command creates an xml file from the tree and annotation
