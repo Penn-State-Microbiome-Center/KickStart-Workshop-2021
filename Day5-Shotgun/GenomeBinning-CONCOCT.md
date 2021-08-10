@@ -177,9 +177,16 @@ For sake of time, let's just use the [NCBI BLAST website](https://blast.ncbi.nlm
 
 ## Putting it all together
 
-Let's now put everything into a script so we can run it with a single command. As usual, we will place this in a bash script in the `scripts` folder and make it executable. Let's call the file `run_CONCOCT.sh` and put the following inside of it:
+Let's now put everything into a script so we can run it with a single command. As usual, we will place this in a bash script in the `scripts` folder and make it executable. Let's call the file `run_CONCOCT.sh` 
+```bash
+touch scripts/run_CONCOCT.sh
+chmod +x scripts/run_CONCOCT.sh
+nano
+```
+and put the following inside of it:
 
-```#!/bin/bash
+```bash
+#!/bin/bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
@@ -220,7 +227,7 @@ extract_fasta_bins.py $longerAssemblyFile ${outFolder}/clustering_merged.csv --o
 
 We can run this script with the following commands to make it work on the GATB assembly:
 ```bash
-cd ..  #<<-- if you aren't already in the base directory CONCOCT_analysis
+cd ~/CONCOCT_analysis  #<<-- if you aren't already in the base directory CONCOCT_analysis
 ./scripts/run_CONCOCT.sh -a data/GATB_default_contigs.fasta -r data/SRS014464-Anterior_nares.fastq -l 1000 -o output/on_GATB
 ```
 
