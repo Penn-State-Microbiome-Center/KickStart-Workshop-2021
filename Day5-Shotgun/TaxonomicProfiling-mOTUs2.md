@@ -146,7 +146,7 @@ do
 	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
 done
 ```
-You can run it with `./run_motus.sh`.
+You can run it with `./scripts/run_motus.sh`.
 
 # Comparing differences between tools
 
@@ -157,12 +157,11 @@ conda activate bioconda  #<<-- or wherever you installed TAMPA
 ```
 Let's pretend the mOTUs2 profile is the "ground truth" and compare its results on one sample to that of MetaPhlAn3:
 ```bash
-cd output
-sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
-sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
-python ../../TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' output/SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
+python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.profile  -b output/mOTUs_vs_MetaPhlAn -nm genus
 ```
-You should then see a file like the following:
+You should then see a file like the following in the folder `mOTUs_analysis/output`:
 ![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
 
 So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let's investigate why this is the case.
@@ -171,11 +170,13 @@ So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let
 let's chase down how mOTUs2 infered that Actinobacteris is present in the sample. Using the `-c` flag, we can indicate that we want read counts instead of relative 
 abundances. We can also save the alignment BAM file with `-I` and the mOTU read counts with `-M` in the following fashion:
 
-`motus profile -s ../data/SRS014464-Anterior_nares.fastq -o SRS014464-Anterior_nares.motus_counts -I SRS014464-Anterior_nares.motus_bam -M SRS014464-Anterior_nares.motus_mgc -c`
+```bash
+motus profile -s data/SRS014464-Anterior_nares.fastq -o output/SRS014464-Anterior_nares.motus_counts -I output/SRS014464-Anterior_nares.motus_bam -M output/SRS014464-Anterior_nares.motus_mgc -c
+```
 
 The `*.motus_counts` file contains the counts of _every_ mOTU in their database, so let's just select the ones with non-zero read counts:
 ```
-grep -v '0$' SRS014464-Anterior_nares.motus_counts
+grep -v '0$' output/SRS014464-Anterior_nares.motus_counts
 ```
 Which gives an output of:
 ```
@@ -187,11 +188,12 @@ unknown Moraxella [meta_mOTU_v2_6740]   1
 So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. If you like, you can take a look at the alignment to investigate if this is spurious or not.
 
 ```bash
- samtools view -h SRS014464-Anterior_nares.motus_bam > SRS014464-Anterior_nares.motus_sam
- /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
+ samtools view -h output/SRS014464-Anterior_nares.motus_bam > output/SRS014464-Anterior_nares.motus_sam
+ cd /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
  grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
  cd ~/mOTUs_Analysis/output/
  grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
+ cd ..
  ```
  
  Then you can find exact matches in the SAM file such as:
