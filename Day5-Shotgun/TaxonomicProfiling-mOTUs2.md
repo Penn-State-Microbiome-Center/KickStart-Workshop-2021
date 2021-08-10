@@ -174,6 +174,8 @@ abundances. We can also save the alignment BAM file with `-I` and the mOTU read 
 motus profile -s data/SRS014464-Anterior_nares.fastq -o output/SRS014464-Anterior_nares.motus_counts -I output/SRS014464-Anterior_nares.motus_bam -M output/SRS014464-Anterior_nares.motus_mgc -c
 ```
 
+Note: if you are getting an error message here, you may need to downgrade your samtools version via: `conda remove -y samtools; conda install -y -c bioconda samtools=1.9`
+
 The `*.motus_counts` file contains the counts of _every_ mOTU in their database, so let's just select the ones with non-zero read counts:
 ```
 grep -v '0$' output/SRS014464-Anterior_nares.motus_counts
