@@ -25,6 +25,8 @@ If you are on OpenDemand, activate the pre-installed software with:
 ```
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
+module load gcc/8.3.1
+module load samtools
 conda activate bioconda
 ```
 
@@ -174,8 +176,6 @@ abundances. We can also save the alignment BAM file with `-I` and the mOTU read 
 motus profile -s data/SRS014464-Anterior_nares.fastq -o output/SRS014464-Anterior_nares.motus_counts -I output/SRS014464-Anterior_nares.motus_bam -M output/SRS014464-Anterior_nares.motus_mgc -c
 ```
 
-Note: if you are getting an error message here, you may need to downgrade your samtools version via: `conda remove -y samtools; conda install -y -c bioconda samtools=1.9`
-
 The `*.motus_counts` file contains the counts of _every_ mOTU in their database, so let's just select the ones with non-zero read counts:
 ```
 grep -v '0$' output/SRS014464-Anterior_nares.motus_counts
@@ -192,8 +192,8 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
 ```bash
  samtools view -h output/SRS014464-Anterior_nares.motus_bam > output/SRS014464-Anterior_nares.motus_sam
  cd /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
- grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
- cd ~/mOTUs_Analysis/
+ grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_analysis/output/ref_mOTU_v2_0478.ids
+ cd ~/mOTUs_analysis/
  grep -f output/ref_mOTU_v2_0478.ids output/SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  cd ..
  ```
