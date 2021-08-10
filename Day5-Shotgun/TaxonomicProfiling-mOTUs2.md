@@ -39,8 +39,8 @@ conda activate motus2
 Run the following commands to create the folder structure and download the necessary data:
 ```
 cd ~
-mkdir mOTUs_Analysis
-cd mOTUs_Analysis
+mkdir mOTUs_analysis
+cd mOTUs_analysis
 mkdir data scripts output
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt
