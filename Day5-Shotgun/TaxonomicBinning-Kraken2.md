@@ -49,10 +49,17 @@ conda activate kraken2
 
 After this, you need to choose what sort of database to use with Kraken. A mechanism is built in that downloads the default database (which is ~100GB in size), but alternate databases are available at: https://github.com/BenLangmead/aws-indexes/blob/master/docs/k2.md
 
-We will be using the smallest database for the sake of time (it includes archaea, bacteria, viruses, plasmids, human sequences, and UniVec_Core (vector contamination). It is capped to only 8GB in size though, so shouldn't be used for serious research (I'd suggest using the default or the "PlusPF" database). We can obtain the training data via:
+We will be using the smallest database for the sake of time (it includes archaea, bacteria, viruses, plasmids, human sequences, and UniVec_Core (vector contamination). It is capped to only 8GB in size though, so shouldn't be used for serious research (I'd suggest using the default or the "PlusPF" database).
+
+Even though this database is small-ish, it will likely make you exceed your home directory quota, so I've pre-downloaded the folder to the following location: `/gpfs/group/RISE/training/2021_microbiome/day5/k2train8gb`. We will make a symbolic link to this folder so that it looks like it's in the right place in your folder structure
+```bash
+ln -s /gpfs/group/RISE/training/2021_microbiome/day5/k2train8gb data/k2train8gb
+```
+
+So please _do not_ run the following command unless you direct it to some location where you have more disk quota available. The training data can be obtained and decompressed via:
 ```bash
 wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_8gb_20210517.tar.gz -P data/k2train8gb
-tar -xzvf data/k2_standard_8gb_20210517.tar.gz -C data/k2train8gb
+tar -xzvf data/k2train8gb/k2_standard_8gb_20210517.tar.gz -C data/k2train8gb
 ```
 This will take some time to download.
 
@@ -139,7 +146,16 @@ Lastly, the `kraken_report.txt` is what led to some interpreting Kraken2 as usab
 Let's dig in a bit more:
 
 ### Kraken2 on contigs
-Take a look at the `kraken_report.txt` in the `output/on_GATB` folder. See how this makes sense considering the BLAST results we saw earlier? In general, _this_ is what you want to be using instead of BLAST when you want to identify the taxa of each of your contigs. The same story emerges when we look at the report in the `output/on_MEGAHIT` directory.
+Take a look at the `kraken_report.txt` in the `output/on_GATB` folder. 
+```
+
+```
+See how this makes sense considering the BLAST results we saw earlier? In general, _this_ is what you want to be using instead of BLAST when you want to identify the taxa of each of your contigs. 
+
+The same story emerges when we look at the report in the `output/on_MEGAHIT` directory.
+```
+
+```
 
 Now, let's contrast this to what happens when we look at the report in the raw reads directory: `output/on_raw_reads`. We get the following species:
 ```
