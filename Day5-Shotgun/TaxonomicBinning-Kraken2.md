@@ -121,7 +121,7 @@ do
   args=( $inOut );
   input=${dataDir}/${args[0]}
   output=${outputDir}/${args[1]}
-  kraken2 kraken2 --db ${trainingDir} --threads 10 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.fq --use-names --report ${output}/kraken_report.txt ${input}
+  kraken2 kraken2 --db ${trainingDir} --threads 4 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.fq --use-names --report ${output}/kraken_report.txt ${input}
 done
 ```
 We can then run this script in the following fashion:
