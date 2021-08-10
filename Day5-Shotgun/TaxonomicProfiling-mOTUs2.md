@@ -190,12 +190,11 @@ unknown Moraxella [meta_mOTU_v2_6740]   1
 So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. If you like, you can take a look at the alignment to investigate if this is spurious or not.
 
 ```bash
- samtools view -h output/SRS014464-Anterior_nares.motus_bam > output/SRS014464-Anterior_nares.motus_sam
- cd /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
- grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_analysis/output/ref_mOTU_v2_0478.ids
- cd ~/mOTUs_analysis/
- grep -f output/ref_mOTU_v2_0478.ids output/SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
- cd ..
+samtools view -h output/SRS014464-Anterior_nares.motus_bam > output/SRS014464-Anterior_nares.motus_sam
+cd /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
+grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_analysis/output/ref_mOTU_v2_0478.ids
+cd ~/mOTUs_analysis/
+grep -f output/ref_mOTU_v2_0478.ids output/SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  ```
  
  Then you can find exact matches in the SAM file such as:
