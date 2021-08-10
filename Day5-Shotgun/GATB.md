@@ -42,7 +42,9 @@ cd ..
 
 To run the GATB pipeline with default settings, we can do the following:
 ```
-python2 scripts/gatb-pipeline-1.171/gatb -s data/SRS014464-Anterior_nares.fasta -o output/default
+cd output
+python2 ../scripts/gatb-pipeline-1.171/gatb -s ../data/SRS014464-Anterior_nares.fasta -o default
+cd ..
 ```
 Note that GATB wants an output _prefix_ as opposed to an output folder. This is why we need to be in the output directory when we call GATB.
 If we wanted to, we could run GATB on all the data, but for the sake of time, let's stick with just this one sample.
@@ -57,7 +59,7 @@ conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/quast
 ```
 And then run QUAST on the assembly:
 ```
-quast -o output/default/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default/default.fasta
+quast -o output/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default.fasta
 ```
 And view the output:
 ![GATB](https://user-images.githubusercontent.com/6362936/128284961-4bd6722d-08d1-4f47-989d-342a22509754.PNG)
