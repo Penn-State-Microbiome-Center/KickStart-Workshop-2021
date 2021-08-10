@@ -14,6 +14,7 @@ While there are a lot of different goodies we could look at, we will focus just 
 ## Installation and setup
 Let's use the usual folder structure
 ```
+cd ~
 mkdir GATB_analysis
 cd GATB_analysis
 mkdir scripts output data
@@ -24,6 +25,7 @@ This pipeline is provided as a stand-along binary that can be installed via the 
 cd scripts
 wget http://gatb-pipeline.gforge.inria.fr/versions/bin/gatb-pipeline-1.171.tar.gz
 tar -xzvf gatb-pipeline-1.171.tar.gz
+cd ..
 ```
 As oposed to the previous tools, this one is not installed with conda, so we will need to specify exactly where the program is whenever we run it.
 The main way we invoke this pipeline is the executable `gatb` which will be invoked with Python2.
@@ -40,8 +42,7 @@ cd ..
 
 To run the GATB pipeline with default settings, we can do the following:
 ```
-cd output
-python2 ../scripts/gatb-pipeline-1.171/gatb -s ../data/SRS014464-Anterior_nares.fasta -o default
+python2 scripts/gatb-pipeline-1.171/gatb -s data/SRS014464-Anterior_nares.fasta -o output/default
 ```
 Note that GATB wants an output _prefix_ as opposed to an output folder. This is why we need to be in the output directory when we call GATB.
 If we wanted to, we could run GATB on all the data, but for the sake of time, let's stick with just this one sample.
@@ -52,11 +53,11 @@ about the quality of this assembly.
 ## Assess the assembly quality
 Let's activate our QUAST environment:
 ```
-conda activae quast
+conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/quast
 ```
 And then run QUAST on the assembly:
 ```
-quast -o quast_out -m 250 --circos --glimmer --rna-finding --single ../data/SRS014464-Anterior_nares.fasta default.fasta
+quast -o output/default/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default/default.fasta
 ```
 And view the output:
 ![GATB](https://user-images.githubusercontent.com/6362936/128284961-4bd6722d-08d1-4f47-989d-342a22509754.PNG)
