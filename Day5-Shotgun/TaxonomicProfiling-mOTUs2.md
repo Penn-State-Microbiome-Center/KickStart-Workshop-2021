@@ -146,7 +146,7 @@ do
 	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
 done
 ```
-You can run it with `./run_motus.sh`.
+You can run it with `./scripts/run_motus.sh`.
 
 # Comparing differences between tools
 
@@ -158,7 +158,7 @@ conda activate bioconda  #<<-- or wherever you installed TAMPA
 Let's pretend the mOTUs2 profile is the "ground truth" and compare its results on one sample to that of MetaPhlAn3:
 ```bash
 cd output
-sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
 sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
 python ../../TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
 ```
