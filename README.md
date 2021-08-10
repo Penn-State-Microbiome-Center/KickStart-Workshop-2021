@@ -24,4 +24,4 @@ A PSU email and access to Penn State’s Roar system is required prior to the wo
 - Day 2: [Basics of Microbiome Analysis - From Planning to Sequencing](/Day2-MicrobiomeAnalysisBasics) - All Tutors
 - Day 3: [Amplicon Data Analysis in R](/Day3-AmpliconR) - Sharifa Crandall and Erika Ganda
 - Day 4: [Amplicon Data Analysis in QIIME2](/Day_4_QIIME2) - Erika Ganda and Laura Weyrich
-- Day 5: Shotgun data analysis (assembly, binning, and profiling) - David Koslicki
+- Day 5: [Shotgun data analysis (assembly, binning, and profiling)](Day5-Shotgun/README.md) - David Koslicki
