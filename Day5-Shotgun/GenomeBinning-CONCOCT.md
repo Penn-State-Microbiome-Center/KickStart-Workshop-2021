@@ -22,13 +22,15 @@ Note that the following analysis is considered incomplete, as after running CONC
 ## File directory setup and data acquisition
 We will use the usual file structure and copy over the data from both the GATB and MEGAHIT analysis:
 ```
+cd ~
+mkdir CONCOCT_analysis
 cd CONCOCT_analysis
 mkdir data scripts output output/on_MEGAHIT output/on_GATB
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt  #<<--TODO: change to single file if needed
 ls *.gz | xargs -P6 -I{} gunzip {}
-cp ../../MEGAHIT_analysis/output/default/final.contigs.fa MEGAHIT_default_contigs.fasta
-cp ../../GATB_analysis/output/default.fasta GATB_default_contigs.fasta
+cp ~/MEGAHIT_analysis/output/default/final.contigs.fa MEGAHIT_default_contigs.fasta
+cp ~/GATB_analysis/output/default.fasta GATB_default_contigs.fasta
 cd ..
 ```
 
@@ -41,7 +43,15 @@ awk '!/^>/{next}{getline s} length(s) >= 1 { print $0 "\n" s s s s s}' data/GATB
 Note too that CONCOCT really would like multiple samples from the same environment to incrase accuracy (keeping track of mapping coverage per contig and sample), but we don't have that with our demo data.
 
 ## Installing CONCOCT
-CONCOCT can currently be installed via the following:
+
+If you are on OnDemand, CONCOCT is pre-installed and can be activated via:
+```bash
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+conda activate bioconda
+```
+
+If you are on a different system, CONCOCT can currently be installed via the following:
 ```bash
 conda deactivate
 conda config --add channels defaults
