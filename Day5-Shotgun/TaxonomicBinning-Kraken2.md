@@ -100,11 +100,14 @@ Options:
 We will want to specify the database we downloaded with the `--db` flag, and save the following output files: `--classified-out` (the sequences that were classified along with their classification), `--output` (the normal output of Kraken2), and `--report` the summary of which clades were found in the input according to Kraken.
 
 Let's go ahead and run Kraken on both assemblies, as well as the raw reads. We will put all of this in a script to execute everything in one go:
-```
+```bash
 touch scripts/run_kraken.sh
 chmod +x scripts/run_kraken.sh
 nano scripts/run_kraken.sh
 ```
+Then put the following into that file:
+```
+#!/bin/bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
@@ -123,7 +126,7 @@ done
 ```
 We can then run this script in the following fashion:
 ```bash
-
+./scripts/run_kraken.sh
 ```
 
 ## Analyzing the output
