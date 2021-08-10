@@ -1,6 +1,6 @@
 # MEGAHIT
 - [MEGAHIT](#megahit)
-  - [Installation](#installation)
+  - [Installation and setup](#installation-and-setup)
   - [Usage](#usage)
     - [File directory setup and data acquisition](#file-directory-setup-and-data-acquisition)
     - [Running MEGAHIT](#running-megahit)
@@ -15,7 +15,21 @@ From [the MEGAHIT publication](https://academic.oup.com/bioinformatics/article/3
 ![btv033f1p](https://user-images.githubusercontent.com/6362936/128756606-090fa301-30df-49b9-83a0-ed72482925d7.gif)
 
 
-## Installation
+## Installation and setup
+
+### File directory setup and data acquisition 
+Let's make a top-level directory for our analysis, the sub-directories, and download the data as usual:
+```
+cd ~
+mkdir MEGAHIT_analysis
+cd MEGAHIT_analysis
+mkdir data scripts output
+cd data
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
+ls *.gz | xargs -P6 -I{} gunzip {}
+cd ..
+```
+
 
 MEGAHIT is already installed in the OnDemand environment, and you can activate it via:
 ```
@@ -103,19 +117,6 @@ Other Arguments:
 ```
 However, the main ones we will be concerned with are specifying if the input data (which must be `fasta` or `fastq`) is paired end (`-1` and `-2` flags), interleaved (`-12` flag) 
 or `-r` single-end, as well as the specification of the output directory with `-o`.
-
-### File directory setup and data acquisition 
-Let's make a top-level directory for our analysis, the sub-directories, and download the data as usual:
-```
-cd ~
-mkdir MEGAHIT_analysis
-cd MEGAHIT_analysis
-mkdir data scripts output
-cd data
-wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
-ls *.gz | xargs -P6 -I{} gunzip {}
-cd ..
-```
 
 ### Running MEGAHIT
 
