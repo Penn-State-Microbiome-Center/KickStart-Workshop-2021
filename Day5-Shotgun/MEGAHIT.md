@@ -17,7 +17,14 @@ From [the MEGAHIT publication](https://academic.oup.com/bioinformatics/article/3
 
 ## Installation
 
-MEGAHIT can be installed with conda in the following fashion
+MEGAHIT is already installed in the OnDemand environment, and you can activate it via:
+```
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+conda activate bioconda
+```
+
+Otherwise, if you are on a different system, MEGAHIT can be installed with conda in the following fashion:
 ```
 conda create -y -n megahit -c bioconda megahit
 conda activate megahit
@@ -98,15 +105,11 @@ However, the main ones we will be concerned with are specifying if the input dat
 or `-r` single-end, as well as the specification of the output directory with `-o`.
 
 ### File directory setup and data acquisition 
-Let's make a top-level directory for our analysis:
+Let's make a top-level directory for our analysis, the sub-directories, and download the data as usual:
 ```
 cd ~
 mkdir MEGAHIT_analysis
 cd MEGAHIT_analysis
-```
-
-As usual, we will make `data`, `scripts`, and `output` directories and download the data we need:
-```
 mkdir data scripts output
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
@@ -145,7 +148,16 @@ assembly assessment package. If you provide it a reference, it can can provide y
 a reference though, you can still use it to gain some insight into your assembly.
 
 ### Installing QUAST
-To install QUAST, we simply need to run:
+
+QUAST comes pre-installed in the OnDemand system and can be activated via:
+```bash
+conda deactivate
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/quast
+```
+
+If you are on a different system, to install QUAST, we simply need to run:
 ```
 conda deactivate
 conda create -y -c bioconda -n quast quast bwa bedtools
