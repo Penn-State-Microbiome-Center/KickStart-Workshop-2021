@@ -23,16 +23,24 @@ In the following, we will contrast the performance of Kraken when applied to raw
 ### Folder structure
 We are going to use out familiar folder structure and copy over both the raw reads as well as the assembled data corresponding to one of our samples:
 ```bash
+cd ~
 mkdir Kraken2_analysis
 cd Kraken2_analysis
 mkdir data/k2train8gb scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
-cp ../mOTUs_analysis/data/SRS014464-Anterior_nares.fastq data/SRS014464-Anterior_nares.fastq
-cp ../MEGAHIT_analysis/output/default/final.contigs.fa data/MEGAHIT_default_contigs.fasta
-cp ../GATB_analysis/output/default.fasta data/GATB_default_contigs.fasta
+cp ~/mOTUs_analysis/data/SRS014464-Anterior_nares.fastq data/SRS014464-Anterior_nares.fastq
+cp ~/MEGAHIT_analysis/output/default/final.contigs.fa data/MEGAHIT_default_contigs.fasta
+cp ~/GATB_analysis/output/default.fasta data/GATB_default_contigs.fasta
 ```
 
 ### Installing Kraken2
-Kraken2 is available on conda and is quite straightforward to install:
+
+If you are using OnDemand, Kraken2 is already installed and you can activate it via:
+```bash
+module use /gpfs/group/RISE/sw7/modules
+module load kraken2
+```
+
+If you are on a different system, then Kraken2 is available on conda and is quite straightforward to install:
 ```
 conda deactivate
 conda create -y -n kraken2 kraken2
@@ -93,10 +101,15 @@ We will want to specify the database we downloaded with the `--db` flag, and sav
 
 Let's go ahead and run Kraken on both assemblies, as well as the raw reads. We will put all of this in a script to execute everything in one go:
 ```
+touch scripts/run_kraken.sh
+chmod +x scripts/run_kraken.sh
+nano scripts/run_kraken.sh
+```
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
-baseDir=/home/dmk333/KickStartWorkshop2021/Kraken2_analysis #<<-- replace with your full path
+scriptFolder=`dirname $0`  #<<-- where this script is located
+baseDir=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
 dataDir=${baseDir}/data
 trainingDir=${dataDir}/k2train8gb
 outputDir=${baseDir}/output
@@ -108,7 +121,10 @@ do
   kraken2 kraken2 --db ${trainingDir} --threads 10 --output ${output}/kraken_default_output.txt --classified-out ${output}/kraken_classified_sequences.fq --use-names --report ${output}/kraken_report.txt ${input}
 done
 ```
-Let's put this in a file named `run_kraken2.sh`, make it executable (`chmod +x run_kraken2.sh`) and then let it rip!
+We can then run this script in the following fashion:
+```bash
+
+```
 
 ## Analyzing the output
 
