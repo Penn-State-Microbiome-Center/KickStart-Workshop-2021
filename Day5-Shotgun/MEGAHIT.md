@@ -204,12 +204,12 @@ set -u  # exit if a variable is undefined
 scriptFolder=`dirname $0`  #<<-- where this script is located
 baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
 outputFolder="${baseFolder}/output"  #<<-- output folder
-inputFolder="${baseFolder}/data"  #<<-- input folder
+dataFolder="${baseFolder}/data"  #<<-- input folder
 
 # Now analyze everything in one go
-for folder in `ls -d ${inputFolder}/*`;
+for folder in `ls -d ${outputFolder}/*`;
 do
-        quast -o ${folder}/quast_out -m 250 --circos --glimmer --rna-finding --single ${inputFolder}/SRS014464-Anterior_nares.fasta ${folder}/final.contigs.fa
+        quast -o ${folder}/quast_out -m 250 --circos --glimmer --rna-finding --single ${dataFolder}/SRS014464-Anterior_nares.fasta ${folder}/final.contigs.fa
 done
 
 ```
