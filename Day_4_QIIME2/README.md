@@ -10,7 +10,7 @@ Today, we'll be learning how to utilize [QIIME2](https://docs.qiime2.org/2021.4/
 	- How to formulate a metadata table;
 	- How to import data into QIIME2;
 	- Running core diversity analyses; 
-  - Performing basic statistics; and
+  	- Performing basic statistics; and
 	- Identifying specific species linked to sample information.
 
 3. If time, extend your knowledge using QIIME2's [Parkinson's Mouse Tutorial](https://docs.qiime2.org/2021.4/tutorials/pd-mice/)  
