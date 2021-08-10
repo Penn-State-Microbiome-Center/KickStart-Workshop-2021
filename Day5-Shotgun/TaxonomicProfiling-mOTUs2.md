@@ -139,7 +139,7 @@ baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from
 outputFolder="${baseFolder}/output"
 
 # Now analyze everything in one go
-inputFolder="${baseFolder}/data/"
+inputFolder="${baseFolder}/data"
 for file in `ls ${inputFolder}/*.fastq`;
 do
 	baseName=$(basename $file)
