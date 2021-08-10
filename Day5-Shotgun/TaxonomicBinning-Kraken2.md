@@ -150,9 +150,9 @@ Take a look at the `kraken_report.txt` in the `output/on_GATB` folder by using t
 ```bash
 grep -w S output/on_GATB/kraken_report.txt | rev | cut -f1 |rev | sed 's/^ *//g'
 ```
+
 ```
 Homo sapiens
-Moraxella nonliquefaciens
 ```
 See how this makes sense considering the BLAST results we saw earlier? In general, _this_ is what you want to be using instead of BLAST when you want to identify the taxa of each of your contigs. 
 
@@ -160,8 +160,10 @@ The same story emerges when we look at the report in the `output/on_MEGAHIT` dir
 ```bash
 grep -w S output/on_MEGAHIT/kraken_report.txt | rev | cut -f1 |rev | sed 's/^ *//g'
 ```
+```
 Homo sapiens
 Moraxella nonliquefaciens
+```
 
 Now, let's contrast this to what happens when we look at the report in the raw reads directory: `output/on_raw_reads`.
 ```bash
