@@ -49,6 +49,8 @@ If you are on OnDemand, CONCOCT is pre-installed and can be activated via:
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
 conda activate bioconda
+module load gcc/8.3.1
+module load samtools
 ```
 
 If you are on a different system, CONCOCT can currently be installed via the following:
@@ -57,7 +59,7 @@ conda deactivate
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
-conda create -n concoct_env -y python=3 concoct mkl
+conda create -n concoct_env -y python=3 concoct mkl samtools
 conda activate concoct_env
 ```
 
