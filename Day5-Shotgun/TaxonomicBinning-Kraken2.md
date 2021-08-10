@@ -26,7 +26,7 @@ We are going to use out familiar folder structure and copy over both the raw rea
 cd ~
 mkdir Kraken2_analysis
 cd Kraken2_analysis
-mkdir data/k2train8gb scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
+mkdir data data/k2train8gb scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
 cp ~/mOTUs_analysis/data/SRS014464-Anterior_nares.fastq data/SRS014464-Anterior_nares.fastq
 cp ~/MEGAHIT_analysis/output/default/final.contigs.fa data/MEGAHIT_default_contigs.fasta
 cp ~/GATB_analysis/output/default.fasta data/GATB_default_contigs.fasta
