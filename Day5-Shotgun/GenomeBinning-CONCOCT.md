@@ -181,7 +181,7 @@ Let's now put everything into a script so we can run it with a single command. A
 ```bash
 touch scripts/run_CONCOCT.sh
 chmod +x scripts/run_CONCOCT.sh
-nano
+nano scripts/run_CONCOCT.sh
 ```
 and put the following inside of it:
 
