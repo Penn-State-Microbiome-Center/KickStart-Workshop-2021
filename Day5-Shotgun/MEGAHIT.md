@@ -129,7 +129,7 @@ Before we investigate the output of MEGAHIT, let's run it with a few different p
 
 We could specify that _all_ k-mers should be considered, and can indicate this by setting the minimum k-mer count to 1:
 ```
-megahit -r ../data/SRS014464-Anterior_nares.fasta -o ../output/min1 --min-count 1
+megahit -r data/SRS014464-Anterior_nares.fasta -o output/min1 --min-count 1
 ```
 This will likely result in many more, shorter contigs due to trusting _every_ k-mer as a true k-mer. I.e. Since we have ignored the effect of noise, we will likely 
 have a variety of contigs that only differ by a few bases, which are likely due to sequencing error.
@@ -204,12 +204,12 @@ set -u  # exit if a variable is undefined
 scriptFolder=`dirname $0`  #<<-- where this script is located
 baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
 outputFolder="${baseFolder}/output"  #<<-- output folder
+inputFolder="${baseFolder}/data"  #<<-- input folder
 
 # Now analyze everything in one go
-inputFolder="${baseFolder}/output/"
-for folder in `ls -d ../output/*`;
+for folder in `ls -d ${inputFolder}/*`;
 do
-        quast -o ${folder}/quast_out -m 250 --circos --glimmer --rna-finding --single ../data/SRS014464-Anterior_nares.fasta ${folder}/final.contigs.fa
+        quast -o ${folder}/quast_out -m 250 --circos --glimmer --rna-finding --single ${inputFolder}/SRS014464-Anterior_nares.fasta ${folder}/final.contigs.fa
 done
 
 ```
