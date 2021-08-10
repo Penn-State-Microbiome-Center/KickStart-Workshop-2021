@@ -191,8 +191,8 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
  samtools view -h output/SRS014464-Anterior_nares.motus_bam > output/SRS014464-Anterior_nares.motus_sam
  cd /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
  grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
- cd ~/mOTUs_Analysis/output/
- grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
+ cd ~/mOTUs_Analysis/
+ grep -f output/ref_mOTU_v2_0478.ids output/SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  cd ..
  ```
  
