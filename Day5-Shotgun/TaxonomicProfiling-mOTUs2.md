@@ -3,8 +3,7 @@
 ===========================
 - [mOTUs2 Tutorial](#motus2-tutorial)
 - [Installation and setup](#installation-and-setup)
-  - [Obtaining test data:](#obtaining-test-data)
-  - [Create folder directory](#create-folder-directory)
+  - [File structure and data:](#file-structure-and-data)
 - [Create taxonomic profiles](#create-taxonomic-profiles)
   - [Input files](#input-files)
   - [Run multiple samples](#run-multiple-samples)
@@ -15,28 +14,39 @@
 shotgun sequencing data.
 
 This tool has a good balance of sensitivity and specificity. It is based on marker genes, but in contrast to MetaPhlAn, it uses single nucleotide variants in the marker genes
-which leads to higher sensitivity.
+which leads to higher sensitivity. 
+
+<img src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" data-canonical-src="https://user-images.githubusercontent.com/6362936/128755895-90497fff-9342-459f-9891-28cd95f8f362.png" width="700" />
+
+(via [the mOTUS website](https://motu-tool.org/))
 
 # Installation and setup
-- Activate conda on Roar: `module load anaconda3`
-- Create the environment: `conda create -y --name motus2 -c bioconda motus`
-- Start the environment: `conda activate motus2`
+If you are on OpenDemand, activate the pre-installed software with:
+```
+module use /gpfs/group/RISE/sw7/modules
+module load anaconda
+conda activate bioconda
+```
 
-## Obtaining test data:
-- Make analysis folder: `mkdir mOTUs_Analysis`
-- `cd mOTUs_Analysis`
-- `mkdir data`
-- `cd data`
-- Download the data: `wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt`
-- Decompress the data in parallel: `ls *.gz | xargs -P6 -I{} gunzip {}`
-- `cd ..`
+Otherwise, if you are on a different system, do a fresh install via:
+```
+conda create -y --name motus2 -c bioconda motus
+conda activate motus2
+```
 
-## Create folder directory
-- `mkdir output`
-- `mkdir scripts`
-- `cd scripts`
-- `vim run_motus.sh`
+## File structure and data:
 
+Run the following commands to create the folder structure and download the necessary data:
+```
+cd ~
+mkdir mOTUs_Analysis
+cd mOTUs_Analysis
+mkdir data scripts output
+cd data
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt
+ls *.gz | xargs -P6 -I{} gunzip {}
+cd ..
+```
 
 # Create taxonomic profiles
 
@@ -113,38 +123,44 @@ Since we now have practice running multiple samples, let's jump straight to:
 ## Run multiple samples
 
 Let's run, in parallel, all the samples through mOTUs2. Put the following code in a file called `run_motus.sh`:
+```
+touch scripts/run_motus.sh
+chmod +x scripts/run_motus.sh
+nano scripts/run_motus.sh
+```
+Then paste the following into that file:
+```
+#!/bin/bash
+set -e  # exit if there is an error
+set -u  # exit if a variable is undefined
 
+scriptFolder=`dirname $0`  #<<-- where this script is located
+baseFolder=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from the script folder)
+outputFolder="${baseFolder}/output"
 
-	#!/bin/bash
-	set -e  # exit if there is an error
-	set -u  # exit if a variable is undefined
-
-	baseFolder="/home/dmk333/KickStartWorkshop2021/mOTUs_Analysis"  #<<---- replace with your base directory
-	outputFolder="${baseFolder}/output"
-
-	# Now analyze everything in one go
-	inputFolder="${baseFolder}/data/"
-	for file in `ls ${inputFolder}/*.fastq`;
-	do
-		baseName=$(basename $file)
-		motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
-	done
-
-And then make it executable via `chmod +x run_motus.sh`, and run it with `./run_motus.sh`.
+# Now analyze everything in one go
+inputFolder="${baseFolder}/data/"
+for file in `ls ${inputFolder}/*.fastq`;
+do
+	baseName=$(basename $file)
+	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
+done
+```
+You can run it with `./run_motus.sh`.
 
 # Comparing differences between tools
 
 Now that we have run both mOTUs2 and MetaPhlAn3 on the same data, we can compare the differences between these tools. Using TAMPA (which we installed previously) we can do this.
 ```
 conda deactivate
-conda activate tampa
+conda activate bioconda  #<<-- or wherever you installed TAMPA
 ```
 Let's pretend the mOTUs2 profile is the "ground truth" and compare its results on one sample to that of MetaPhlAn3:
 ```bash
-cd ../output
-sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
+cd output
+sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile  #<<-- make the sample id the same for both tools
 sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' SRS014464-Anterior_nares.profile  #<<-- make the sample id the same for both tools
-python ../../TAMPA/src/profile_to_plot.py -i ../../MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
+python ../../TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_Analysis/output/SRS014464-Anterior_nares.cami_profile -g SRS014464-Anterior_nares.profile  -b mOTUs_vs_MetaPhlAn -nm genus
 ```
 You should then see a file like the following:
 ![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
@@ -172,9 +188,9 @@ So it found a read that really did hit to Corynebacterium pseudodiphtheriticum. 
 
 ```bash
  samtools view -h SRS014464-Anterior_nares.motus_bam > SRS014464-Anterior_nares.motus_sam
- cd /data/dmk333/Software/conda/miniconda3/envs/motus2/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
- grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/KickStartWorkshop2021/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
- cd ~/KickStartWorkshop2021/mOTUs_Analysis/output/
+ /gpfs/group/RISE/sw7/anaconda/anaconda3/envs/bioconda/share/motus-2.1.1/db_mOTU  #<<-- or wherever your installed version is
+ grep ref_mOTU_v2_0478 mOTU-LG.map.tsv | cut -f1 | cut -d'.' -f1 > ~/mOTUs_Analysis/output/ref_mOTU_v2_0478.ids
+ cd ~/mOTUs_Analysis/output/
  grep -f ref_mOTU_v2_0478.ids SRS014464-Anterior_nares.motus_sam | grep -v '^@SQ'
  ```
  

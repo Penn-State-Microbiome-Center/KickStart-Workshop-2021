@@ -17,3 +17,5 @@ We will look at the genome binner [CONCOCT](https://concoct.readthedocs.io/en/la
 
 ## Taxonomic Binning
 We will look at the taxonomic binner [Kraken2](https://ccb.jhu.edu/software/kraken2/index.shtml) in the [Taxonomic Binning](TaxonomicBinning-Kraken2.md) section.
+
+# Please proceed to the [Genome Binning](GenomeBinning-CONCOCT.md) section
