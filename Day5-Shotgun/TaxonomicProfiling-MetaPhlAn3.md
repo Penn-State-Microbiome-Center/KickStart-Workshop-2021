@@ -328,8 +328,9 @@ done
 
 At this point, you can then execute the script using the following command:
 ```
-./scripts/run_metaphlan.sh
+nohup ./scripts/run_metaphlan.sh &
 ```
+The `&` on the end means to send the process to the background, and the `nohup` asks the shell: "even though I don't have this process actively pulled up, please don't hang up on it". This will let the process run in the background as we continue the analysis below.
 
 You will now have a complete set of six profile output files
 and six intermediate mapping files. If you'd like to skip this step to
@@ -354,7 +355,40 @@ following links (right-click on the link and pick 'Save Link as ..' or click on 
     -   [SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
     -   [SRS014494-Posterior\_fornix.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix.fasta.gz.bowtie2out.txt)
 
-### **Merge outputs**
+## **Visualize results**
+---------------------
+
+### **Simple Vizualization with TAMPA**
+For a quick visualization of the profile, I've developed a tool called TAMPA (TAxonoMic Profiling Anlaysis) to help view the profile output when it is in the CAMI 
+(Critical Assessment of Metagenome Interpretation) format. 
+
+If you are on OpenDemand, TAMPA comes pre-installed, and you can activate it with
+```
+conda deactivate
+conda activate bioconda
+```
+
+To install this tool from scratch, run the following:
+```bash
+git clone https://github.com/dkoslicki/TAMPA.git
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda deactivate
+conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
+conda activate tampa
+```
+
+You can then create the visualization with the following command:
+```bash
+ python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
+```
+This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
+![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
+
+Note that TAMPA was originally designed for pairwise comparison of profiles (tool vs. tool, or tool vs. ground truth), hence the funky display.
+
+### **Merge outputs for hclust**
 
 Finally, the MetaPhlAn distribution includes a utility script that will
 create a single tab-delimited table from these files: 
@@ -400,38 +434,6 @@ The first few lines look like:
 
 ------------------------------------------------------------------------
 
-## **Visualize results**
----------------------
-
-### **Simple Vizualization with TAMPA**
-For a quick visualization of the profile, I've developed a tool called TAMPA (TAxonoMic Profiling Anlaysis) to help view the profile output when it is in the CAMI 
-(Critical Assessment of Metagenome Interpretation) format. 
-
-If you are on OpenDemand, TAMPA comes pre-installed, and you can activate it with
-```
-conda deactivate
-conda activate bioconda
-```
-
-To install this tool from scratch, run the following:
-```bash
-git clone https://github.com/dkoslicki/TAMPA.git
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda deactivate
-conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
-conda activate tampa
-```
-
-You can then create the visualization with the following command:
-```bash
- python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
-```
-This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
-![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
-
-Note that TAMPA was originally designed for pairwise comparison of profiles (tool vs. tool, or tool vs. ground truth), hence the funky display.
 
 ### **Create a heatmap with hclust2**
 
