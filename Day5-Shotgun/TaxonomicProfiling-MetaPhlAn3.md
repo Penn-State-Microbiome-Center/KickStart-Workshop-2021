@@ -303,7 +303,7 @@ First, we will make a file that will contain the commands we want:
 ```
 touch scripts/run_metaphlan.sh  #<<-- create an empty file
 chmod +x scripts/run_metaphlan.sh  #<<-- make it executable
-vim scripts/run_metaphlan.sh  #<<-- or your favorite text editor.
+nano scripts/run_metaphlan.sh  #<<-- or your favorite text editor (I usually use vim, but the intro to linux on the first day used nano)
 ```
 Then paste the following into this file:
 ```
