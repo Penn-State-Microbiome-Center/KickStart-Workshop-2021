@@ -10,7 +10,7 @@
 # Reminder if you forget how to access the ACI ROAR cluster
 
 ## Graphical user interface
-1. Nagivate to [portal.aci.ics.psu.edu](portal.aci.ics.psu.edu)
+1. Nagivate to [portal.aci.ics.psu.edu](https://portal.aci.ics.psu.edu)
 2. On the top, click the dropdown for "Interactive Apps"
 3. Click "RHEL7 Interactive Desktop"
 4. Change the allocation drop-down to "wff3_g_g_lc_icds-training"
