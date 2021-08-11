@@ -56,7 +56,7 @@ Even though this database is small-ish, it will likely make you exceed your home
 ln -s /gpfs/group/RISE/training/2021_microbiome/day5/k2train8gb data/k2train8gb
 ```
 
-So please _do not_ run the following command unless you direct it to some location where you have more disk quota available. The training data can be obtained and decompressed via:
+So please **_do not_** run the following command unless you direct it to some location where you have more disk quota available. The training data can be obtained and decompressed via:
 ```bash
 wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_8gb_20210517.tar.gz -P data/k2train8gb
 tar -xzvf data/k2train8gb/k2_standard_8gb_20210517.tar.gz -C data/k2train8gb
