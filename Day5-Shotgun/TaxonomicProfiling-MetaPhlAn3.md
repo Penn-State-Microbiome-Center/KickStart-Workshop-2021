@@ -401,7 +401,7 @@ The resulting table can be opened in Excel, any gene expression analysis
 program, `less` (example below), or visualized graphically as per
 subsequent tutorial sections:
 
-     more output/merged_abundance_table.txt
+     cat output/merged_abundance_table.txt | column -t | more
 
 The first few lines look like:
 
