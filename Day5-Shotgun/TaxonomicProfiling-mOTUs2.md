@@ -168,7 +168,8 @@ sed -i 's/SampleID:.*/SampleID:Anterior_nares/g' output/SRS014464-Anterior_nares
 python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i ~/MetaPhlAn_analysis/output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.profile  -b output/mOTUs_vs_MetaPhlAn -nm genus
 ```
 You should then see a file like the following in the folder `mOTUs_analysis/output`:
-![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/128077598-37084056-d65d-4d6f-b3e0-33a2cd254b1f.png)
+![mOTUs_vs_MetaPhlAn_tree_genus_Anterior_nares](https://user-images.githubusercontent.com/6362936/129259332-d8a45e9e-82ec-4e78-b8e8-ffa825620113.png)
+
 
 So it looks like mOTUs2 found some Actinobacteria, while MetaPhlAn3 did not! Let's investigate why this is the case.
 
