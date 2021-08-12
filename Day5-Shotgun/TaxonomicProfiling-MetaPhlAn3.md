@@ -482,6 +482,10 @@ The new abundance table
 will contain only the species abundances with just the species names
 (instead of the full taxonomy).
 
+Take a look at the file with:
+```bash
+cat output/merged_abundance_table_species.txt | column -t | more
+```
 The first few lines of the file will look like: 
 
     body_site	SRS014494-Posterior_fornix_profile	SRS014476-Supragingival_plaque_profile	SRS014472-Buccal_mucosa_profile	SRS014470-Tongue_dorsum_profile	SRS014464-Anterior_nares_profile	SRS014459-Stool_profile
