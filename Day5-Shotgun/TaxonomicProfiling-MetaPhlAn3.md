@@ -307,7 +307,7 @@ nano scripts/run_metaphlan.sh  #<<-- or your favorite text editor (I usually use
 ```
 Then paste the following into this file:
 ```
-#!/bin/bash
+#!/usr/bin/env bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
