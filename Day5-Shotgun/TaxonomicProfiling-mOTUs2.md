@@ -133,7 +133,7 @@ nano scripts/run_motus.sh
 ```
 Then paste the following into that file:
 ```
-#!/bin/bash
+#!/usr/bin/env bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
