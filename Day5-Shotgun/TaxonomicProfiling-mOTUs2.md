@@ -178,6 +178,7 @@ let's chase down how mOTUs2 infered that Actinobacteris is present in the sample
 abundances. We can also save the alignment BAM file with `-I` and the mOTU read counts with `-M` in the following fashion:
 
 ```bash
+module load samtools  #<<-- see the funky issue with renaming python in the installation/activation section above
 motus profile -s data/SRS014464-Anterior_nares.fastq -o output/SRS014464-Anterior_nares.motus_counts -I output/SRS014464-Anterior_nares.motus_bam -M output/SRS014464-Anterior_nares.motus_mgc -c
 ```
 
