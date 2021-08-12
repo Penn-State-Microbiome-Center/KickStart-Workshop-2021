@@ -322,7 +322,7 @@ for file in `ls ${inputFolder}/*.fasta`;
 do
         baseName=$(basename $file)
         metaphlan $file --input_type fasta --nproc 1 --CAMI_format_output --force -o ${outputFolder}/${baseName%.fasta}.cami_profile --bowtie2out ${outputFolder}/${baseName}.bowtie2out.txt &
-        metaphlan $file --input_type fasta --nproc 1 --force -o ${outputFolder}/${baseName%.fasta}.default_profile --bowtie2out ${outputFolder}/${baseName}.bowtie2out2.txt &
+        metaphlan $file --input_type fasta --nproc 1 --force -o ${outputFolder}/${baseName%.fasta}.default_profile --bowtie2out ${outputFolder}/${baseName}.bowtie2out2.txt ;
 done
 ```
 
