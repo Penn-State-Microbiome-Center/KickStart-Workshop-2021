@@ -27,6 +27,7 @@ module use /gpfs/group/RISE/sw7/modules
 module load anaconda
 module load gcc/8.3.1
 module load samtools
+module unload python  #<<-- samtools auto-loads a different version of python than the one we want to use
 conda activate bioconda
 ```
 
@@ -176,8 +177,6 @@ let's chase down how mOTUs2 infered that Actinobacteris is present in the sample
 abundances. We can also save the alignment BAM file with `-I` and the mOTU read counts with `-M` in the following fashion:
 
 ```bash
-module load gcc/8.3.1  #<<-- due to some odd bug, we need to load this again after switching conda envs
-module load samtools  #<<-- due to some odd bug, we need to load this again after switching conda envs
 motus profile -s data/SRS014464-Anterior_nares.fastq -o output/SRS014464-Anterior_nares.motus_counts -I output/SRS014464-Anterior_nares.motus_bam -M output/SRS014464-Anterior_nares.motus_mgc -c
 ```
 
