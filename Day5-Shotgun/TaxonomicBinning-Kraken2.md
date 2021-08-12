@@ -123,6 +123,11 @@ baseDir=$(dirname $scriptFolder)  #<<-- the main analysis folder (one up from th
 dataDir=${baseDir}/data
 trainingDir=${dataDir}/k2train8gb
 outputDir=${baseDir}/output
+# The following is one way to do a for loop with pairs (similar to python's `zip` function): 
+# I use a sequence of space-delimited strings like "A B" "C D". The for loop will take each string and split it up into an array. 
+# Hence the loop args will look like:
+# loop 1: args==["A" "B"]
+# loop 2: args==["C" "D"] etc.
 for inOut in "MEGAHIT_default_contigs.fasta on_MEGAHIT" "GATB_default_contigs.fasta on_GATB" "SRS014464-Anterior_nares.fastq on_raw_reads";
 do
   args=( $inOut );
