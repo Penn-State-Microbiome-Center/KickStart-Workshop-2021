@@ -186,7 +186,7 @@ nano scripts/run_CONCOCT.sh
 and put the following inside of it:
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
