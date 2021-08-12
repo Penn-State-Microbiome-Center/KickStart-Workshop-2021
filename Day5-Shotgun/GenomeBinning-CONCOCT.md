@@ -190,6 +190,11 @@ and put the following inside of it:
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
+# Set up the input arguments: 
+# -a for the assembly file, 
+# -r for the reads file,
+# -o the location of the output folder,
+# -l the length you want to chop your sequences
 while getopts a:r:o:l: flag
 do
     case "${flag}" in
@@ -204,7 +209,7 @@ done
 longerAssemblyFile=$(echo $assemblyFile | cut -d'.' -f1)_longer.fasta
 awk '!/^>/{next}{getline s} length(s) >= 1 { print $0 "\n" s s s s s}' $assemblyFile > $longerAssemblyFile
 
-# align
+# Perform the alignment
 readsFileNoExt=$(echo $readsFile | cut -d'.' -f1)
 readsFileNoExt=$(basename $readsFileNoExt)
 mkdir -p $outFolder
@@ -214,12 +219,12 @@ samtools view -S -b ${outFolder}/${readsFileNoExt}.sam > ${outFolder}/${readsFil
 samtools sort ${outFolder}/${readsFileNoExt}.bam -o ${outFolder}/${readsFileNoExt}.sorted.bam
 samtools index ${outFolder}/${readsFileNoExt}.sorted.bam
 
-# Run preproc and concoct
+# Run preprocessing and CONCOCT
 cut_up_fasta.py $longerAssemblyFile -c $cutLength -o 0 --merge_last -b ${outFolder}/contigs_${cutLength}.bed > ${outFolder}/contigs_${cutLength}.fa
 concoct_coverage_table.py ${outFolder}/contigs_${cutLength}.bed ${outFolder}/${readsFileNoExt}.sorted.bam >${outFolder}/coverage_table.tsv
 concoct --composition_file ${outFolder}/contigs_${cutLength}.fa --coverage_file ${outFolder}/coverage_table.tsv -b ${outFolder} --threads 4
 
-# Post proc
+# Post processing
 merge_cutup_clustering.py ${outFolder}/clustering_gt1000.csv > ${outFolder}/clustering_merged.csv
 mkdir ${outFolder}/fasta_bins
 extract_fasta_bins.py $longerAssemblyFile ${outFolder}/clustering_merged.csv --output_path ${outFolder}/fasta_bins
