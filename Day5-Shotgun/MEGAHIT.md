@@ -197,7 +197,7 @@ nano scripts/run_quast.sh  #<<-- or vim or the like
 ```
 Then paste the following into that file:
 ```
-#!/bin/bash
+#!/usr/bin/env bash
 set -e  # exit if there is an error
 set -u  # exit if a variable is undefined
 
