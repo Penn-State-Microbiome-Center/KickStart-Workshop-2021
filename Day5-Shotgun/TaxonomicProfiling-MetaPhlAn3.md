@@ -321,16 +321,16 @@ inputFolder="${baseFolder}/data/"
 for file in `ls ${inputFolder}/*.fasta`;
 do
         baseName=$(basename $file)
-        metaphlan $file --input_type fasta --nproc 4 --CAMI_format_output --force -o ${outputFolder}/${baseName%.fasta}.cami_profile --bowtie2out output/${baseName}.bowtie2out.txt
-        metaphlan output/${baseName}.bowtie2out.txt --input_type bowtie2out --nproc 4 -o ${outputFolder}/${baseName%.fasta}.default_profile
+        metaphlan $file --input_type fasta --nproc 1 --CAMI_format_output --force -o ${outputFolder}/${baseName%.fasta}.cami_profile --bowtie2out output/${baseName}.bowtie2out.txt &
+        metaphlan $file --input_type fasta --nproc 1 --force -o ${outputFolder}/${baseName%.fasta}.default_profile --bowtie2out output/${baseName}.bowtie2out2.txt &
 done
 ```
 
 At this point, you can then execute the script using the following command:
 ```
-nohup ./scripts/run_metaphlan.sh &
+./scripts/run_metaphlan.sh
 ```
-The `&` on the end means to send the process to the background, and the `nohup` asks the shell: "even though I don't have this process actively pulled up, please don't hang up on it". This will let the process run in the background as we continue the analysis below.
+<!-- The `&` on the end means to send the process to the background, and the `nohup` asks the shell: "even though I don't have this process actively pulled up, please don't hang up on it". This will let the process run in the background as we continue the analysis below. -->
 
 You will now have a complete set of six profile output files
 and six intermediate mapping files. If you'd like to skip this step to
