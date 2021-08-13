@@ -155,7 +155,7 @@ QUAST comes pre-installed in the OnDemand system and can be activated via:
 conda deactivate
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/quast
+conda activate bioconda
 ```
 
 If you are on a different system, to install QUAST, we simply need to run:
