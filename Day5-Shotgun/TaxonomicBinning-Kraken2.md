@@ -133,7 +133,8 @@ outputDir=${baseDir}/output
 # Hence the loop args will look like:
 # loop 1: args==["A" "B"]
 # loop 2: args==["C" "D"] etc.
-for inOut in "MEGAHIT_default_contigs.fasta on_MEGAHIT" "GATB_default_contigs.fasta on_GATB" "SRS014464-Anterior_nares.fastq on_raw_reads";
+#for inOut in "MEGAHIT_default_contigs.fasta on_MEGAHIT" "GATB_default_contigs.fasta on_GATB" "SRS014464-Anterior_nares.fastq on_raw_reads";
+for inOut in "MEGAHIT_default_contigs.fasta on_MEGAHIT" "SRS014464-Anterior_nares.fastq on_raw_reads";
 do
   args=( $inOut );
   input=${dataDir}/${args[0]}
