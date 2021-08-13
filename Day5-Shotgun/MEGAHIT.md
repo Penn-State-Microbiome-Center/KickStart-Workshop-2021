@@ -155,7 +155,7 @@ QUAST comes pre-installed in the OnDemand system and can be activated via:
 conda deactivate
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate bioconda
+conda activate quast
 ```
 
 If you are on a different system, to install QUAST, we simply need to run:
