@@ -394,7 +394,7 @@ Finally, the MetaPhlAn distribution includes a utility script that will
 create a single tab-delimited table from these files: 
 ```bash
 conda deactivate
-conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/metaphlan
+conda bioconda
 merge_metaphlan_tables.py output/*default_profile > output/merged_abundance_table.txt
 ```
 -   [merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
