@@ -6,6 +6,7 @@ Materials for the Fall 2022 KickStart Workshop
 August 1 - 5th, 2022  
 Time: 1pm - 5pm each day  
 In person in [Althouse's Blue Box](https://tlt.psu.edu/bluebox/)
+(for Zoom options, please contact Laura Weyrich) 
 
 ### Tutors:
 - Laura Weyrich		lsw132@psu.edu  
