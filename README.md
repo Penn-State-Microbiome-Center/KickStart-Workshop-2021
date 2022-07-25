@@ -1,6 +1,6 @@
 ![IntroImage](images/IntroImage.png)
 # KickStart-Workshop-2021
-Materials for the Fall 2021 KickStart Workshop
+Materials for the Fall 2022 KickStart Workshop
 
 ## Details
 August 1 - 5th, 2022  
