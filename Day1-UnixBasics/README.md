@@ -24,7 +24,7 @@
  1pm - 3pm: [Software Carpentry - The Unix Shell](https://swcarpentry.github.io/shell-novice/)  
  3pm - 5pm: [Data Carpentry - Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) 
  
-## Configuration Suggestions
+## Configuration Suggestions (if remote)
 1. Two monitors: Set up Zoom on one and browser on the other.
 
 2. Two devices: Code in your browser on your computer, and call into Zoom on your tablet, iPhone, etc. You may want to also call in from the computer you're coding on so that you can cut and paste any commands entered in the Zoom chat. 
