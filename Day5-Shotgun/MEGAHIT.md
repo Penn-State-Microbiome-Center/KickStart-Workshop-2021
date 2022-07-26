@@ -25,7 +25,7 @@ mkdir MEGAHIT_analysis
 cd MEGAHIT_analysis
 mkdir data scripts output
 cd data
-wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2022/main/Day5-Shotgun/Data/file_list.txt
 ls *.gz | xargs -P6 -I{} gunzip {}
 cd ..
 ```
