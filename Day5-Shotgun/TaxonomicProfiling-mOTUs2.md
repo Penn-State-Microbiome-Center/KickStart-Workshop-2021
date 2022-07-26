@@ -148,6 +148,8 @@ do
 	baseName=$(basename $file)
 	motus profile -s ${file} -o ${outputFolder}/${baseName%.fastq}.profile -t 5 -C parenthesis &
 done
+wait
+exit
 ```
 You can run it with:
 ```
