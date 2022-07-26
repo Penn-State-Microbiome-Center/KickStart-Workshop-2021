@@ -1,7 +1,7 @@
 # Intro to Unix and Programming
 
 ## Goals
-1. Gain familiarity with Penn State's [Roar computing cluster](https://www.icds.psu.edu/computing-services/roar-user-guide/) cluster.  
+1. Gain familiarity with Penn State's [Roar computing cluster](https://www.icds.psu.edu/computing-services/roar-user-guide/) cluster. [[slides](https://docs.google.com/presentation/d/17Gb4X6JsvvhE2Qx-UwuJo2lTXZJBFJh8ZT5H-l9kjZ0/edit?usp=sharing)] 
 
 2. Learn how to control a computer via command line, including:
 	- moving around the computer 
