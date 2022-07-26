@@ -33,7 +33,7 @@ The main way we invoke this pipeline is the executable `gatb` which will be invo
 Lastly, we will again obtain the (same) data:
 ```
 cd data
-wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2022/main/Day5-Shotgun/Data/file_list.txt
 ls *.gz | xargs -P6 -I{} gunzip {}
 cd ..
 ```
@@ -55,7 +55,11 @@ about the quality of this assembly.
 ## Assess the assembly quality
 Let's activate our QUAST environment:
 ```
-conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/quast
+conda activate microbiome2
+```
+Or if you used the local install from the MEGAHIT analysis
+```
+conda activate ../MEGAHIT_analysis/quast
 ```
 And then run QUAST on the assembly:
 ```
