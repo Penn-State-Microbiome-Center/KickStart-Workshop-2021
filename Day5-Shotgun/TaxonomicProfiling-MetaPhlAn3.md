@@ -32,7 +32,7 @@ If you are taking part in the workshop, use the following commands to activate t
 ```
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate /gpfs/group/RISE/training/2021_microbiome/day5/CustomConda/metaphlan
+conda activate microbiome2
 ```
 
 ## Full installation
