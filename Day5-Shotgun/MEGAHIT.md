@@ -35,7 +35,7 @@ MEGAHIT is already installed in the OnDemand environment, and you can activate i
 ```
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate bioconda
+conda activate microbiome1
 ```
 
 Otherwise, if you are on a different system, MEGAHIT can be installed with conda in the following fashion:
@@ -155,7 +155,7 @@ QUAST comes pre-installed in the OnDemand system and can be activated via:
 conda deactivate
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate quast
+conda activate microbiome2
 ```
 
 If you are on a different system, to install QUAST, we simply need to run:
