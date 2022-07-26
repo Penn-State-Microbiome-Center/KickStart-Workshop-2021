@@ -27,10 +27,9 @@ module load anaconda
 ## SSH
 ```
 ssh <PSU ID>@submit.aci.ics.psu.edu
-qsub -A wff3_g_g_lc_icds-training -l walltime=4:00:00 -l nodes=1:ppn=4 -I
+qsub -A wff3_g_g_lc_icds-training -l walltime=5:00:00 -l nodes=1:ppn=4 -I
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-module load hipmer/1.2.2.7
 ```
 # Shotgun metagenomic analysis
 This portion of the workshop will cover a few of the basic computational approaches to studying WGS metagenomic data. 
