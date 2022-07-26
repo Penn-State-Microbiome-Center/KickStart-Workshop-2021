@@ -56,7 +56,7 @@ Then download the data
 
 ```
 cd data
-wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list.txt  #<<-- downloads the data from github
+wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2022/main/Day5-Shotgun/Data/file_list.txt  #<<-- downloads the data from github
 ls *.gz | xargs -P6 -I{} gunzip {}  #<<-- decompresses the data in parallel
 cd ..  #<<-- move back up a directory
 ```
