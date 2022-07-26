@@ -161,8 +161,8 @@ conda activate microbiome2
 If you are on a different system, to install QUAST, we simply need to run:
 ```
 conda deactivate
-conda create -y -c bioconda -n quast quast bwa bedtools
-conda activate quast
+conda create --prefix ./quast -y -c bioconda quast bwa bedtools
+conda activate ./quast
 ```
 
 ### Running QUAST
