@@ -16,7 +16,7 @@
 
 ## Resources
 - [Roar Users' Guide](https://www.icds.psu.edu/computing-services/roar-user-guide/)
-- [Roar Open OnDemand Portal](portal.aci.ics.psu.edu)
+- [Roar Open OnDemand Portal](https://portal.aci.ics.psu.edu)
 - [Workshop schedule](https://docs.google.com/document/d/1oX0NwdpEEpgbQS76OWuQGctiF7Gn5nkPZVMd9xGRWek/edit?usp=sharing)
 - [Unix cheat sheet](https://sites.tufts.edu/cbi/files/2013/01/linux_cheat_sheet.pdf)
 
