@@ -19,16 +19,20 @@ mkdir GATB_analysis
 cd GATB_analysis
 mkdir scripts output data
 ```
+This pipeline is installed in a different location, so please do the following to activate it on your system
+```
+conda deactivate
+conda activate
+export PATH="/gpfs/group/RISE/training/2022_microbiome/gatb/gatb-minia-pipeline:$PATH"
+```
 
-This pipeline is provided as a stand-along binary that can be installed via the following
+If you want to install it in a different location, here are the steps:
 ```
-cd scripts
-wget http://gatb-pipeline.gforge.inria.fr/versions/bin/gatb-pipeline-1.171.tar.gz
-tar -xzvf gatb-pipeline-1.171.tar.gz
-cd ..
+conda create -y -n gatb scipy numpy mathstats pysam
+git clone --recursive https://github.com/GATB/gatb-minia-pipeline
+cd gatb-minia-pipeline ; make test
+export PATH="$PWD:$PATH"
 ```
-As oposed to the previous tools, this one is not installed with conda, so we will need to specify exactly where the program is whenever we run it.
-The main way we invoke this pipeline is the executable `gatb` which will be invoked with Python2.
 
 Lastly, we will again obtain the (same) data:
 ```
@@ -43,7 +47,7 @@ cd ..
 To run the GATB pipeline with default settings, we can do the following:
 ```
 cd output
-python2 ../scripts/gatb-pipeline-1.171/gatb -s ../data/SRS014464-Anterior_nares.fasta -o default
+gatb -s ../data/SRS014464-Anterior_nares.fasta -o default
 cd ..
 ```
 Note that GATB wants an output _prefix_ as opposed to an output folder. This is why we need to be in the output directory when we call GATB.
@@ -57,10 +61,7 @@ Let's activate our QUAST environment:
 ```
 conda activate microbiome2
 ```
-Or if you used the local install from the MEGAHIT analysis
-```
-conda activate ~/quast
-```
+
 And then run QUAST on the assembly:
 ```
 quast -o output/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default.fasta
