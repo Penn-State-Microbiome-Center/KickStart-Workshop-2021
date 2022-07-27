@@ -48,7 +48,8 @@ If you are on OnDemand, CONCOCT is pre-installed and can be activated via:
 ```bash
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
-conda activate bioconda
+conda deactivate
+conda activate microbiome2
 module load gcc/8.3.1
 module load samtools
 ```
@@ -226,7 +227,7 @@ concoct --composition_file ${outFolder}/contigs_${cutLength}.fa --coverage_file 
 
 # Post processing
 merge_cutup_clustering.py ${outFolder}/clustering_gt1000.csv > ${outFolder}/clustering_merged.csv
-mkdir ${outFolder}/fasta_bins
+mkdir -p ${outFolder}/fasta_bins
 extract_fasta_bins.py $longerAssemblyFile ${outFolder}/clustering_merged.csv --output_path ${outFolder}/fasta_bins
 ```
 
