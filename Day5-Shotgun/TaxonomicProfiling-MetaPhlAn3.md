@@ -365,23 +365,19 @@ For a quick visualization of the profile, I've developed a tool called TAMPA (TA
 If you are on OpenDemand, TAMPA comes pre-installed, and you can activate it with
 ```
 conda deactivate
-conda activate bioconda
+conda activate microbiome2
 ```
 
 To install this tool from scratch, run the following:
 ```bash
+cd ~
 git clone https://github.com/dkoslicki/TAMPA.git
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda deactivate
-conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
-conda activate tampa
 ```
 
 You can then create the visualization with the following command:
 ```bash
- python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
+cd ~/MetaPhlAn_analysis
+python ../TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
 ```
 This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
 ![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
@@ -393,8 +389,6 @@ Note that TAMPA was originally designed for pairwise comparison of profiles (too
 Finally, the MetaPhlAn distribution includes a utility script that will
 create a single tab-delimited table from these files: 
 ```bash
-conda deactivate
-conda activate bioconda
 merge_metaphlan_tables.py output/*default_profile > output/merged_abundance_table.txt
 ```
 -   [merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
