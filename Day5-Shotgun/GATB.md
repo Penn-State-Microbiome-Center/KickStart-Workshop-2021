@@ -59,7 +59,7 @@ conda activate microbiome2
 ```
 Or if you used the local install from the MEGAHIT analysis
 ```
-conda activate ../MEGAHIT_analysis/quast
+conda activate ~/quast
 ```
 And then run QUAST on the assembly:
 ```

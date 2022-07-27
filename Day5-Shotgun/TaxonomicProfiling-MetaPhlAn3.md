@@ -339,21 +339,21 @@ following links (right-click on the link and pick 'Save Link as ..' or click on 
 
 1. **Profile output files**
 
-    -   [SRS014459-Stool\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014459-Stool_profile.txt)
-    -   [SRS014464-Anterior\_nares\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014464-Anterior_nares_profile.txt)
-    -   [SRS014470-Tongue\_dorsum\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014470-Tongue_dorsum_profile.txt)
-    -   [SRS014472-Buccal\_mucosa\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014472-Buccal_mucosa_profile.txt)
-    -   [SRS014476-Supragingival\_plaque\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque_profile.txt)
-    -   [SRS014494-Posterior\_fornix\_profile.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix_profile.txt)
+    -   [SRS014459-Stool\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014459-Stool_profile.txt)
+    -   [SRS014464-Anterior\_nares\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014464-Anterior_nares_profile.txt)
+    -   [SRS014470-Tongue\_dorsum\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014470-Tongue_dorsum_profile.txt)
+    -   [SRS014472-Buccal\_mucosa\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014472-Buccal_mucosa_profile.txt)
+    -   [SRS014476-Supragingival\_plaque\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque_profile.txt)
+    -   [SRS014494-Posterior\_fornix\_profile.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix_profile.txt)
 
 2. **Intermediate mapping output files**
 
-   -   [SRS014459-Stool.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014459-Stool.fasta.gz.bowtie2out.txt)
-   -   [SRS014464-Anterior\_nares.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014464-Anterior_nares.fasta.gz.bowtie2out.txt)
-   -   [SRS014470-Tongue\_dorsum.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014470-Tongue_dorsum.fasta.gz.bowtie2out.txt)
-   -   [SRS014472-Buccal\_mucosa.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014472-Buccal_mucosa.fasta.gz.bowtie2out.txt)
-    -   [SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
-    -   [SRS014494-Posterior\_fornix.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix.fasta.gz.bowtie2out.txt)
+   -   [SRS014459-Stool.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014459-Stool.fasta.gz.bowtie2out.txt)
+   -   [SRS014464-Anterior\_nares.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014464-Anterior_nares.fasta.gz.bowtie2out.txt)
+   -   [SRS014470-Tongue\_dorsum.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014470-Tongue_dorsum.fasta.gz.bowtie2out.txt)
+   -   [SRS014472-Buccal\_mucosa.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014472-Buccal_mucosa.fasta.gz.bowtie2out.txt)
+    -   [SRS014476-Supragingival\_plaque.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014476-Supragingival_plaque.fasta.gz.bowtie2out.txt)
+    -   [SRS014494-Posterior\_fornix.fasta.gz.bowtie2out.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/SRS014494-Posterior_fornix.fasta.gz.bowtie2out.txt)
 
 ## **Visualize results**
 ---------------------
@@ -365,23 +365,19 @@ For a quick visualization of the profile, I've developed a tool called TAMPA (TA
 If you are on OpenDemand, TAMPA comes pre-installed, and you can activate it with
 ```
 conda deactivate
-conda activate bioconda
+conda activate microbiome2
 ```
 
 To install this tool from scratch, run the following:
 ```bash
+cd ~
 git clone https://github.com/dkoslicki/TAMPA.git
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda deactivate
-conda create -c etetoolkit -y -n tampa python=3.7 numpy  ete3  seaborn pandas matplotlib biom-format
-conda activate tampa
 ```
 
 You can then create the visualization with the following command:
 ```bash
- python /gpfs/group/RISE/sw7/anaconda/envs/bioconda/other/TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
+cd ~/MetaPhlAn_analysis
+python ../TAMPA/src/profile_to_plot.py -i output/SRS014464-Anterior_nares.cami_profile -g output/SRS014464-Anterior_nares.cami_profile -b output/Anterior_nares -nm genus
 ```
 This will create a file `Anterior_nares_tree_genus_Metaphlan_analysis.png` which you can transfer back to your device and view. It should look like the following:
 ![Anterior_nares_tree_genus_Metaphlan_analysis](https://user-images.githubusercontent.com/6362936/128067595-75f37852-9a16-4762-9e8f-529ed2f71980.png)
@@ -393,11 +389,9 @@ Note that TAMPA was originally designed for pairwise comparison of profiles (too
 Finally, the MetaPhlAn distribution includes a utility script that will
 create a single tab-delimited table from these files: 
 ```bash
-conda deactivate
-conda activate bioconda
 merge_metaphlan_tables.py output/*default_profile > output/merged_abundance_table.txt
 ```
--   [merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
+-   [merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
 
 The resulting table can be opened in Excel, any gene expression analysis
 program, `less` (example below), or visualized graphically as per
@@ -462,7 +456,7 @@ Otherwise, if you are on a personal machine or somewhere else, you can install h
 
 Run the following command to create a species only abundance table,
 providing the abundance table (
-[merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
+[merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)
 ) created in prior tutorial steps: :
 
 ```
@@ -478,7 +472,7 @@ includes the species name. The `cut` gives us all columns except the NCBI Taxon 
 helps us replace `clade_name` to `body_site`.
 
 The new abundance table
-([merged\_abundance\_table\_species.txt](https://github.com/biobakery/biobakery/blob/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table_species.txt))
+([merged\_abundance\_table\_species.txt](https://github.com/biobakery/biobakery/blob/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table_species.txt))
 will contain only the species abundances with just the species names
 (instead of the full taxonomy).
 
@@ -522,7 +516,7 @@ feature label size to 10, sets the max sample and feature label length to
 resolution of 300 (in that order!).
 
 Open the resulting heatmap
-([abundance\_heatmap\_species.png](https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_abundance_heatmap.png))
+([abundance\_heatmap\_species.png](https://github.com/biobakery/biobakery/blob/mpa_docker/images/MetaPhlAn3_tutorial_abundance_heatmap.png))
 to take a look. If you generated it on your local computer, just double
 click. If you're using a server with just a terminal interface, you
 might have to transfer the file locally first using a tool like `scp`.
@@ -530,7 +524,7 @@ If you're using a server with a graphical interface, you can open the
 file using a command like `see abundance_heatmap_species.png`). Using
 any of these methods, the results should look like:
 
-<img src = "https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_abundance_heatmap.png" width=450>
+<img src = "https://github.com/biobakery/biobakery/blob/mpa_docker/images/MetaPhlAn3_tutorial_abundance_heatmap.png" width=450>
 
 Notice that due to the very large differences between body site
 communities in the human microbiome, we can still easily see
@@ -585,7 +579,7 @@ graphical annotation options for the tree.
 
 Run the following command to generate the two input files for GraPhlAn
 (the tree and annotation files) providing the abundance table
-([merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)) created in the prior tutorial steps reformatted to remove the version header and the NCBI taxon id in the second column.
+([merged\_abundance\_table.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance_table.txt)) created in the prior tutorial steps reformatted to remove the version header and the NCBI taxon id in the second column.
 
      tail -n +2 output/merged_abundance_table.txt | cut -f1,3- > output/merged_abundance_table_reformatted.txt
      export2graphlan.py --skip_rows 1 -i output/merged_abundance_table_reformatted.txt --tree output/merged_abundance.tree.txt --annotation output/merged_abundance.annot.txt --most_abundant 100 --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 --external_annotations 7 --min_clade_size 1
@@ -609,9 +603,9 @@ are `merged_abundance.tree.txt` and `merged_abundance.annot.txt`.
 
 Run the following commands to generate the cladogram providing the tree
 (
-[merged\_abundance.tree.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance.tree.txt)
+[merged\_abundance.tree.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance.tree.txt)
 ) and its annotation (
-[merged\_abundance.annot.txt](https://github.com/biobakery/biobakery/raw/master/demos/biobakery_demos/data/metaphlan3/output/merged_abundance.annot.txt)
+[merged\_abundance.annot.txt](https://github.com/biobakery/biobakery/raw/mpa_docker/demos/biobakery_demos/data/metaphlan3/output/merged_abundance.annot.txt)
 ) files from the prior step :
 
 ```
@@ -635,15 +629,15 @@ The first few lines of the xml file are:
             <clade>
 
 The generated cladogram
-([merged\_abundance.png](https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_GraPhlAn_main.png))
+([merged\_abundance.png](https://github.com/biobakery/biobakery/blob/mpa_docker/images/MetaPhlAn3_tutorial_GraPhlAn_main.png))
 is:
 
-<img src = "https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_GraPhlAn_main.png"
+<img src = "https://github.com/biobakery/biobakery/blob/mpa_docker/images/MetaPhlAn3_tutorial_GraPhlAn_main.png"
 width=500>
 
 
 The annotation
-([merged\_abundance\_annot.png](https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_GraPhlAn_annot.png)
+([merged\_abundance\_annot.png](https://github.com/biobakery/biobakery/blob/mpa_docker/images/MetaPhlAn3_tutorial_GraPhlAn_annot.png)
 ) should be:
 
 <img src = "https://github.com/biobakery/biobakery/blob/master/images/MetaPhlAn3_tutorial_GraPhlAn_annot.png"
