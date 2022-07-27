@@ -445,10 +445,10 @@ convenience script that can show any, some, or all of the microbes or
 samples in a MetaPhlAn table. In this tutorial we will plot the heatmap
 for all of the samples.
 
-If you are on OpenDemand, hclust2 is already installed in the `bioconda` environment:
+If you are on OpenDemand, hclust2 is already installed in the `microbiome2` environment:
 ```
 conda deactivate
-conda activate bioconda
+conda activate microbiome2
 ```
 
 Otherwise, if you are on a personal machine or somewhere else, you can install hclust2 via conda:
@@ -563,7 +563,7 @@ tutorial](https://github.com/biobakery/biobakery/wiki/graphlan).
 If you are on OpenDemand, you can activate GraPhlAn with the following
 ```
 conda deactivate
-conda activate graphlan
+conda activate /gpfs/group/RISE/training/2022_microbiome/graphlan
 ```
 
 Otherwise, if you are on a personal machine or the like, you can install GraPhlAn with
