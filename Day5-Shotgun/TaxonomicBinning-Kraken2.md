@@ -26,7 +26,7 @@ We are going to use out familiar folder structure and copy over both the raw rea
 cd ~
 mkdir Kraken2_analysis
 cd Kraken2_analysis
-mkdir data data/k2train8gb scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
+mkdir data scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
 cp ~/MEGAHIT_analysis/output/default/final.contigs.fa data/MEGAHIT_default_contigs.fasta
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt
@@ -56,7 +56,7 @@ We will be using the smallest database for the sake of time (it includes archaea
 
 Even though this database is small-ish, it will likely make you exceed your home directory quota, so I've pre-downloaded the folder to the following location: `/gpfs/group/RISE/training/2021_microbiome/day5/k2train8gb`. We will make a symbolic link to this folder so that it looks like it's in the right place in your folder structure
 ```bash
-ln -s /gpfs/group/RISE/training/2021_microbiome/day5/k2train8gb data/
+ln -s /gpfs/group/RISE/training/2022_microbiome/k2train8gb data/
 ```
 
 So please **_do not_** run the following command unless you direct it to some location where you have more disk quota available. The training data can be obtained and decompressed via:
