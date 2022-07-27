@@ -27,9 +27,7 @@ cd ~
 mkdir Kraken2_analysis
 cd Kraken2_analysis
 mkdir data data/k2train8gb scripts output output/on_MEGAHIT output/on_GATB output/on_raw_reads
-#cp ~/mOTUs_analysis/data/SRS014464-Anterior_nares.fastq data/SRS014464-Anterior_nares.fastq
 cp ~/MEGAHIT_analysis/output/default/final.contigs.fa data/MEGAHIT_default_contigs.fasta
-#cp ~/GATB_analysis/output/default.fasta data/GATB_default_contigs.fasta
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2021/main/Day5-Shotgun/Data/file_list_fastq.txt
 ls *.gz | xargs -P6 -I{} gunzip {}
@@ -42,7 +40,7 @@ If you are using OnDemand, Kraken2 is already installed and you can activate it 
 ```bash
 conda deactivate
 module use /gpfs/group/RISE/sw7/modules
-module load kraken2
+module load microbiome1
 ```
 
 If you are on a different system, then Kraken2 is available on conda and is quite straightforward to install:
