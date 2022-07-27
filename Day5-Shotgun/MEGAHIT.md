@@ -35,6 +35,7 @@ MEGAHIT is already installed in the OnDemand environment, and you can activate i
 ```
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
+conda deactivate
 conda activate microbiome1
 ```
 
