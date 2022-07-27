@@ -38,9 +38,10 @@ cd ..
 
 If you are using OnDemand, Kraken2 is already installed and you can activate it via:
 ```bash
-conda deactivate
 module use /gpfs/group/RISE/sw7/modules
-module load microbiome1
+module load anaconda
+conda deactivate
+conda activate microbiome1
 ```
 
 If you are on a different system, then Kraken2 is available on conda and is quite straightforward to install:
