@@ -19,6 +19,7 @@
 - [Roar Open OnDemand Portal](https://portal.aci.ics.psu.edu)
 - [Workshop schedule](https://docs.google.com/document/d/1qtprs0Qv-3_zlxScq9uska6E_xs8IBbO-GNWt4G2YsQ/edit?usp=sharing)
 - [Unix cheat sheet](https://sites.tufts.edu/cbi/files/2013/01/linux_cheat_sheet.pdf)
+- [Base R cheat sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)
 
 ## Schedule
  1pm - 3pm: [Software Carpentry - The Unix Shell](https://swcarpentry.github.io/shell-novice/)  
