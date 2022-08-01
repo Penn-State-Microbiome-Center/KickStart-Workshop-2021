@@ -4,7 +4,7 @@ Today, we'll be learning how to utilize [QIIME2](https://docs.qiime2.org/2021.4/
 
 
 ## Aims
-1. Learn amplicon [basics](1_BioinformaticsWorkshop_2021-QIIME2.pdf)
+1. Learn amplicon [basics](2022_MCKickstart_QIIME2.pdf)
 
 2. Run through QIIME2's [Moving Pictures Tutorial](https://docs.qiime2.org/2021.4/tutorials/moving-pictures/)  
 	- How to formulate a metadata table;
@@ -17,6 +17,6 @@ Today, we'll be learning how to utilize [QIIME2](https://docs.qiime2.org/2021.4/
   
   
 ## Resources
-- [Getting Started Info](GettingStarted.pdf)
+- [Getting Started Info](2022_QIIME2onOnDemand.txt)
 - [QIIME2 Documentation](https://docs.qiime2.org/2021.4/plugins/)
 - [Workshop schedule](https://docs.google.com/document/d/1oX0NwdpEEpgbQS76OWuQGctiF7Gn5nkPZVMd9xGRWek/edit?usp=sharing)
