@@ -14,7 +14,7 @@
 ## Schedule
 1. Welcome and Introductions
 2. Sampling (Sharifa Crandall) - [pdf](Sampling_Day_2_Crandall_Kickstart.pdf)  
-3. Controls/Contamination (Laura Weyrich) - [pdf](2021_KickstartWorkshop_Weyrich_Contamination.pdf) 
+3. Controls/Contamination (Laura Weyrich) - [pdf](2022_KickStartWorkshop_Contamination.pdf) 
 4. DNA Extraction/Library Prep (Emily Davenport) - [keynote](2020_DNA_extraction_and_library_prep_microbiome_center_kick_start_workshop_2020-08-04.key) | [pdf](2020_DNA_extraction_and_library_prep_microbiome_center_kick_start_workshop_2020-08-04.pdf)
 5. 10 minute break
 6. Sequencing Technology (Darrell Cockburn)
