@@ -22,7 +22,7 @@ mkdir scripts output data
 This pipeline is installed in a different location, so please do the following to activate it on your system
 ```
 conda deactivate
-conda activate
+conda activate /gpfs/group/RISE/training/2022_microbiome/gatb
 export PATH="/gpfs/group/RISE/training/2022_microbiome/gatb/gatb-minia-pipeline:$PATH"
 ```
 
@@ -59,6 +59,7 @@ about the quality of this assembly.
 ## Assess the assembly quality
 Let's activate our QUAST environment:
 ```
+conda deactivate
 conda activate microbiome2
 ```
 
@@ -67,6 +68,9 @@ And then run QUAST on the assembly:
 quast -o output/quast_out -m 250 --circos --glimmer --rna-finding --single data/SRS014464-Anterior_nares.fasta output/default.fasta
 ```
 And view the output:
+```
+firefox output/quast_out/report.html
+```
 ![GATB](https://user-images.githubusercontent.com/6362936/128284961-4bd6722d-08d1-4f47-989d-342a22509754.PNG)
 
 
