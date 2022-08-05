@@ -49,9 +49,7 @@ If you are on OnDemand, CONCOCT is pre-installed and can be activated via:
 module use /gpfs/group/RISE/sw7/modules
 module load anaconda
 conda deactivate
-conda activate microbiome2
-module load gcc/8.3.1
-module load samtools
+conda activate microbiome1
 ```
 
 If you are on a different system, CONCOCT can currently be installed via the following:
